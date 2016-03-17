@@ -1,0 +1,60 @@
+開發日誌
+2012-0905
+==========================================================================
+DB
+CREATE TABLE IF NOT EXISTS `upfiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `articleid` int(11) NOT NULL DEFAULT '0',
+  `filename` varchar(100) NOT NULL,
+  `filesize` bigint(20) DEFAULT '0',
+  `filetype` varchar(255) DEFAULT NULL,
+  `binary` longblob NOT NULL,
+  `hitnum` int(11) NOT NULL DEFAULT '0',
+  `visible` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `NAME` (`articleid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+
+
+==========================================================================
+舊資料
+DB =======================================================================
+
+@DB
+ALTER TABLE  `articles` ADD  `grade` INT NOT NULL AFTER  `author`;
+UPDATE articles SET grade=7 WHERE classname LIKE "國中%" AND classnum=101;
+UPDATE articles SET grade=8 WHERE classname LIKE "國中%" AND classnum=100;
+UPDATE articles SET grade=9 WHERE classname LIKE "國中%" AND classnum=99;
+UPDATE articles SET grade=10 WHERE classname LIKE "高中%" AND classnum=101;
+UPDATE articles SET grade=11 WHERE classname LIKE "高中%" AND classnum=100;
+UPDATE articles SET grade=12 WHERE classname LIKE "高中%" AND classnum=99;
+UPDATE articles SET classname = replace(classname, '國中', '');
+UPDATE articles SET classname = replace(classname, '高中', '');
+
+@DB_DONE
+ALTER TABLE  `articles` ADD  `email` VARCHAR( 100 ) NOT NULL AFTER  `title` ;
+
+
+@DB
+CREATE TABLE IF NOT EXISTS `jobs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
+  `comment` text NOT NULL,
+  `starttime` datetime NOT NULL,
+  `finishtime` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98;
+
+TIPS =====================================================================
+
+TODO =====================================================================
+
+	
+WORKING ==================================================================
+
+
+DONE =====================================================================
+
+

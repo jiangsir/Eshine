@@ -1,0 +1,199 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, h4, h5, h6, p, ol, ul, form, blockquote, img, div, span
+{
+	padding:0;
+	margin:0;
+}
+
+h1 {
+	padding:0;
+	margin:0;
+	width:80%;
+}
+
+h2, h3 {
+	padding:0;
+	margin:0;
+	width:90%;
+}
+
+img {
+border:0;
+}
+
+body
+{
+	background-color: #765f38;
+}
+
+#wrapper
+{
+	width: 786px;
+	margin: 0px auto;
+	
+}
+
+#header
+{
+	margin-top: 15px;
+	width: 786px;
+	height: 163px;
+	background-image: url(images/header.jpg);
+	background-repeat: no-repeat;
+}
+
+#logo
+{
+	padding-top: 88px;
+	padding-left: 25px;
+	margin:0px;
+	width: 400px;
+	float: left;
+}
+
+#logo a
+{
+	color: #382612;
+	text-decoration:none;
+	font-family: Times;
+	font-size: 50px;
+	font-style: normal;
+	line-height:72px;
+}
+
+#navigation
+{
+	padding-top: 12px;
+	color: #382612;
+	border-width:thin;
+	font-family: Times;
+	font-size: 24px;
+	float: right;
+	clear: right;
+	width: 280px;
+	text-align:right;
+	padding:30px;
+/*	width: 60%;*/
+}
+
+#navigation a
+{
+	color: #382612;
+	text-decoration: none;
+	font-family: times;
+	font-size: 20px;
+}
+#inner-wrap
+{
+	background-repeat: no-repeat;
+	width: 780px;
+	float: left;
+	background-color: #a28e69;
+	background-image: url(images/sidebar.gif);
+	background-repeat: repeat-y;
+	background-position:right;
+}
+
+#side-bar
+{
+	float: right;
+	width: 214px;
+}
+#side-bar a
+{
+	color: #ffffff;
+	text-decoration: none;
+	font-family: Times;
+	padding:0px 10px 5px 20px;	
+}
+#side-bar ul	
+{
+	list-style: none;
+}
+#side-bar h2
+{
+	font-weight: 200;
+	color: #ffef6b;
+	padding:0px 10px 5px 20px;
+	font-family: Times;
+}
+#side-bar h3
+{
+	font-weight: 100;
+	color: #ffef6b;
+	padding:0px 10px 5px 20px;
+	font-family: Times;
+}
+#side-bar p
+{
+	padding:0px 10px 20px 20px;
+	font-family: Times;
+}
+#main
+{
+	background-image: url(images/background.gif);
+	background-repeat: no-repeat;
+	margin-left:20px;
+	float: left;
+	width: 546px;
+}
+
+#footer
+{
+	width: 780px;
+	height: 40px;
+	background-color: #593c1b;
+	clear: both;
+	padding-top: 15px;
+}
+#footer p
+{
+	text-align: center;
+	color: #cac0ae;
+	font-size: .6em;
+	
+}
+#footer a
+{
+	color: white;
+}
+
+#loginbox {
+margin:20px;
+text-align:center;
+
+}
+
+h1
+{
+	font-weight: 100;
+	color: #252d05;
+	margin-top: 15px;
+	font-family: Times;
+	
+}
+
+h2
+{
+	font-weight: 100;
+	color: #5c4211;
+	margin-top: 15px;
+	font-family: Times;
+}
+
+h3
+{
+	font-weight: 100;
+	color: #ffe381;
+	margin-top: 15px;
+	font-family: Times;
+}
+
+p
+{
+	color: #ffffff;
+	font-family: Times;
+	
+}
