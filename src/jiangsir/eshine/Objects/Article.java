@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import jiangsir.eshine.DAOs.JobDAO;
 import jiangsir.eshine.DAOs.UpfileDAO;
 import jiangsir.eshine.Utils.DataBase;
 import jiangsir.eshine.Utils.ENV;
@@ -202,20 +203,15 @@ public class Article {
 	// =====================================================================
 
 	public String getINNER_PATH() {
-		return ENV.APP_REAL_PATH + "upfiles"
-				+ System.getProperty("file.separator");
+		return ENV.APP_REAL_PATH + "upfiles" + System.getProperty("file.separator");
 	}
 
 	public String getINNER_FILENAME() {
 		// String sub = filename.substring(filename.lastIndexOf("."));
-		Job job = new Job(this.getJobid());
+		Job job = new JobDAO().getJobById(this.getJobid());
 		// return job.getNiandu() + "_" + this.getId() + "_" + this.getTitle()
 		// + "_" + this.getFilename();
-		return job.getNiandu()
-				+ "_"
-				+ this.getId()
-				+ this.getFilename().substring(
-						this.getFilename().lastIndexOf('.'));
+		return job.getNiandu() + "_" + this.getId() + this.getFilename().substring(this.getFilename().lastIndexOf('.'));
 	}
 
 	public ArrayList<Upfile> getUpfiles() {

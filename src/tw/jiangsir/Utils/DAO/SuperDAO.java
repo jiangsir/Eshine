@@ -223,6 +223,17 @@ abstract public class SuperDAO<T> {
 		}
 		return list;
 	}
+	protected ArrayList<T> executeQuery(String sql, Class<T> theclass) {
+		try {
+			PreparedStatement pstmt = this.getConnection().prepareStatement(sql);
+			// ArrayList<T> t = this.executeQuery(pstmt, theclass);
+			ArrayList<T> t = this.executeQueryByAnnotations(pstmt, theclass);
+			return t;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ArrayList<T>();
+		}
+	}
 
 	/**
 	 * 僅回傳該 table 的第一個欄位，並且回傳 long, 通常第一個欄位都是一個 table 的 id.

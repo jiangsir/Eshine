@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
@@ -51,8 +53,6 @@ public class OnlineUser extends User implements Serializable, HttpSessionBinding
 			// session_locale.split("_")[1]));
 			// }
 		}
-
-		// this.setSession_account(user.getAccount());
 
 		Object value;
 		// for (Field field : this.getFields().values()) {

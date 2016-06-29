@@ -1,11 +1,8 @@
 package jiangsir.eshine.Objects;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import jiangsir.eshine.Utils.DataBase;
+import jiangsir.eshine.Utils.Utils;
+import tw.jiangsir.Utils.Annotations.Persistent;
 
 /**
  *  - User.java
@@ -19,41 +16,47 @@ import jiangsir.eshine.Utils.DataBase;
  */
 public class Job {
 
+	@Persistent(name = "id")
 	private Integer id = 0;
+	@Persistent(name = "niandu")
 	private Integer niandu = 0;
+	@Persistent(name = "title")
 	private String title = "";
+	@Persistent(name = "comment")
 	private String comment = "";
+	@Persistent(name = "starttime")
 	private Date starttime = new Date();
+	@Persistent(name = "finishtime")
 	private Date finishtime = new Date();
 
 	public Job() {
 
 	}
 
-	public Job(Integer id) {
-		String sql = "SELECT * FROM jobs WHERE id=" + id;
-		ArrayList<?> list = new DataBase().executeQuery(sql);
-		if (list.size() == 0) {
-			return;
-		}
-		this.init((HashMap<?, ?>) list.get(0));
-	}
+	// public Job(Integer id) {
+	// String sql = "SELECT * FROM jobs WHERE id=" + id;
+	// ArrayList<?> list = new DataBase().executeQuery(sql);
+	// if (list.size() == 0) {
+	// return;
+	// }
+	// this.init((HashMap<?, ?>) list.get(0));
+	// }
 
-	public Job(HashMap<?, ?> map) {
-		if (map == null) {
-			return;
-		}
-		this.init(map);
-	}
-
-	private void init(Map<?, ?> map) {
-		this.setId((Integer) map.get("id"));
-		this.setNiandu((Integer) map.get("niandu"));
-		this.setTitle((String) map.get("title"));
-		this.setComment((String) map.get("comment"));
-		this.setStarttime((Date) map.get("starttime"));
-		this.setFinishtime((Date) map.get("finishtime"));
-	}
+	// public Job(HashMap<?, ?> map) {
+	// if (map == null) {
+	// return;
+	// }
+	// this.init(map);
+	// }
+	//
+	// private void init(Map<?, ?> map) {
+	// this.setId((Integer) map.get("id"));
+	// this.setNiandu((Integer) map.get("niandu"));
+	// this.setTitle((String) map.get("title"));
+	// this.setComment((String) map.get("comment"));
+	// this.setStarttime((Date) map.get("starttime"));
+	// this.setFinishtime((Date) map.get("finishtime"));
+	// }
 
 	public Integer getId() {
 		return id;
@@ -73,11 +76,20 @@ public class Job {
 		this.niandu = niandu;
 	}
 
+	public void setNiandu(String niandu) {
+		if (niandu == null) {
+			return;
+		}
+
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
+		if (title == null)
+			return;
 		this.title = title;
 	}
 
@@ -97,12 +109,26 @@ public class Job {
 		this.starttime = starttime;
 	}
 
+	public void setStarttime(String starttime) {
+		if (starttime == null) {
+			return;
+		}
+		this.setStarttime(Utils.parseDatetime(starttime));
+	}
+
 	public Date getFinishtime() {
 		return finishtime;
 	}
 
 	public void setFinishtime(Date finishtime) {
 		this.finishtime = finishtime;
+	}
+
+	public void setFinishtime(String finishtime) {
+		if (finishtime == null) {
+			return;
+		}
+		this.setFinishtime(Utils.parseDatetime(finishtime));
 	}
 
 	/**

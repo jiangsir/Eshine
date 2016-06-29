@@ -18,9 +18,9 @@
 				<h2>&nbsp;</h2>
 				<p></p>
 				<form action="" method="post" name="form1" id="form1">
-					<p>
+<%-- 					<p>
 						年度: <select name="niandu" id="niandu">
-							<option value="98">98</option>
+							<option value="${niandu }">${niandu}</option>
 							<option value="99">99</option>
 							<option value="100">100</option>
 							<option value="101">101</option>
@@ -29,7 +29,7 @@
 							<option value="104">104</option>
 						</select>
 					</p>
-					<p>
+ --%>					<p>
 						標題： <input name="title" type="text" value="${job.title}" size="50" />
 					</p>
 					<p>&nbsp;</p>
