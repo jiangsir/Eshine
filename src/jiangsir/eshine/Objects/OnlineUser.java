@@ -24,10 +24,6 @@ public class OnlineUser extends User implements Serializable, HttpSessionBinding
 	private String sessionid = "";
 	private HttpSession session = null;
 
-	public OnlineUser() {
-
-	}
-
 	public HttpSession getSession() {
 		return session;
 	}
@@ -43,7 +39,7 @@ public class OnlineUser extends User implements Serializable, HttpSessionBinding
 	 */
 	public OnlineUser(HttpSession session, User user) {
 		if (session != null) {
-			// this.setSession(session);
+			this.setSession(session);
 			this.setSessionid(session.getId());
 			// 這裡如果讀取 session_locale 會導致問題。因為系統一開始啓動的時候，根本還沒有 session_locale
 			// 但是如果不在這邊幫 sessionUserBean 將 locale 訊息設定上去，後面登入測驗 ShowContest
@@ -124,8 +120,8 @@ public class OnlineUser extends User implements Serializable, HttpSessionBinding
 		if (session != null) {
 			session.invalidate();
 		}
-		// this.setSessionid("");
-		// this.setSession(null);
+		this.setSessionid("");
+		this.setSession(null);
 	}
 
 	// /**
@@ -148,13 +144,13 @@ public class OnlineUser extends User implements Serializable, HttpSessionBinding
 		return false;
 	}
 
-	public boolean isNullOnlineUser() {
-		if (new OnlineUser().getSessionid().equals(sessionid)
-				&& new OnlineUser().getAccount() == new User().getAccount()) {
-			return true;
-		}
-		return false;
-	}
+	// public boolean getIsNullOnlineUser() {
+	// if (new OnlineUser().getSessionid().equals(sessionid)
+	// && new OnlineUser().getAccount() == new User().getAccount()) {
+	// return true;
+	// }
+	// return false;
+	// }
 
 	@Override
 	public void valueBound(HttpSessionBindingEvent event) {

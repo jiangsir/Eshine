@@ -48,7 +48,7 @@ public class UserDAO extends SuperDAO<User> {
 	 * @return
 	 */
 	protected User getUserByAccountPasswd(String account, String passwd) throws DataException {
-		String sql = "SELECT * FROM users WHERE account=? AND passwd=MD5(?)";
+		String sql = "SELECT * FROM users WHERE account=? AND passwd=?";
 		PreparedStatement pstmt;
 		try {
 			pstmt = this.getConnection().prepareStatement(sql);

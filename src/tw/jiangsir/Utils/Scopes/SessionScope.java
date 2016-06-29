@@ -45,6 +45,9 @@ public class SessionScope implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public SessionScope(HttpSession session) {
+		if (session == null) { // 避免第一次剛進來, session 尚未建立，會產生 NullException
+			return;
+		}
 		this.session = session;
 		this.setSessionid(session.getId());
 		this.setSession_ip((String) session.getAttribute("session_ip"));

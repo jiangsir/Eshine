@@ -18,10 +18,11 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		// CurrentUser currentUser = SessionFactory.getCurrentUser(session);
-		System.out.println("Logout");
+		//
 		OnlineUser onlineUser = new SessionScope(session).getOnlineUser();
-		onlineUser.doLogout();
+		if (onlineUser != null) {
+			onlineUser.doLogout();
+		}
 		response.sendRedirect("./");
 	}
 }

@@ -44,7 +44,7 @@ public class Alert extends Throwable {
 	@Persistent(name = "debugs")
 	private HashSet<String> debugs = new HashSet<String>();
 	@Persistent(name = "onlineuser")
-	private OnlineUser onlineUser = new OnlineUser();
+	private OnlineUser onlineUser = null;
 
 	public Alert() {
 	}
