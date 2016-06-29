@@ -9,9 +9,9 @@
 	<div id="logo">
 		<a href="./"><img src="./images/eshineTITLE.png" /></a>
 	</div>
+	<jsp:include page="include/SystemNow.jsp" />
 	<div id="navigation">
 		<c:if test="${sessionScope.session_account!=null}"> | <a
 				href="./Logout">離開管理</a> | </c:if>
 	</div>
-</div>
-<jsp:include page="include/SystemNow.jsp" />
+	</div>
