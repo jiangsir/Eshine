@@ -7,14 +7,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>${initParam.TITLE}</title>
-<link rel="stylesheet" href="style.css" type="text/css"/>
-</head>
-<jsp:useBean id="now" class="java.util.Date" />
-<script type="text/javascript" src="./jscripts/jquery-1.2.6.min.js"></script>
+<jsp:include page="CommonHead.jsp" />
+
 <script type="text/javascript" src="jscripts/js_date.js"></script>
-<script type="text/javascript" src="jscripts/jquery.timeout.interval.idle.js"></script>
+<script type="text/javascript"
+	src="jscripts/jquery.timeout.interval.idle.js"></script>
 <script language="javascript">
 jQuery(document).ready(function(){
    var stoptime = parseInt(${job.finishtime.time});
@@ -57,46 +54,53 @@ function countdown(countdown){
 }
 
 </script>
-<body>
-<div id="wrapper">
-  <jsp:include page="Header.jsp" />
-  <div id="inner-wrap">
-    <jsp:include page="SideBar.jsp" />
-    <div id="main">
-	<c:choose>
-	<c:when test="${job.id==0}">
-      <h1>目前沒有任何投稿作業！</h1>
-	</c:when>
-	<c:otherwise>
-      <h1>${job.title}</h1>
-      <p>${job.comment}</p>
-      <h3>現在時間: <span id="now"></span></h3><br />
-	  <c:choose>
-	  <c:when test="${now.time > job.finishtime.time}">
-      <p>投稿截止日期: ${job.finishtime}</p>
-      <p>投稿日期已過，下次請早！</p>	  
-	  </c:when>
-	  <c:otherwise>
-      <p>請注意!! 投稿截止日期: ${job.finishtime}</p>
-      <p>投稿截止倒數：<span id="countdown"></span></p>	  
-<br /><br />
-<p>請按右側 『我要投稿！』 進行投稿</p><br />
 
-      <p>若因為擁擠而上傳失敗<br />
-請直接 Email 至 <a href="mailto:eshine@tea.nknush.kh.edu.tw">eshine@tea.nknush.kh.edu.tw</a></p>
-	  </c:otherwise>
-	  </c:choose>
-	</c:otherwise>
-	</c:choose>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </div>
-  </div>
-  <jsp:include page="Footer.jsp" />
-</div>
+</head>
+<jsp:useBean id="now" class="java.util.Date" />
+<body>
+	<div id="wrapper">
+		<jsp:include page="Header.jsp" />
+		<div id="inner-wrap">
+			<jsp:include page="SideBar.jsp" />
+			<div id="main">
+				<c:choose>
+					<c:when test="${job.id==0}">
+						<h1>目前沒有任何投稿作業！</h1>
+					</c:when>
+					<c:otherwise>
+						<h1>${job.title}</h1>
+						<p>${job.comment}</p>
+						<h3>
+							現在時間: <span id="now"></span>
+						</h3>
+						<br />
+						<c:choose>
+							<c:when test="${now.time > job.finishtime.time}">
+								<p>投稿截止日期: ${job.finishtime}</p>
+								<p>投稿日期已過，下次請早！</p>
+							</c:when>
+							<c:otherwise>
+								<p>請注意!! 投稿截止日期: ${job.finishtime}</p>
+								<p>
+									投稿截止倒數：<span id="countdown"></span>
+								</p>
+								<br />
+								<br />
+								<p>請按右側 『我要投稿！』 進行投稿</p>
+								<br />
+
+								<p>
+									若因為擁擠而上傳失敗<br /> 請直接 Email 至 <a
+										href="mailto:eshine@tea.nknush.kh.edu.tw">eshine@tea.nknush.kh.edu.tw</a>
+								</p>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
+				<br /> <br /> <br /> <br /> <br /> <br />
+			</div>
+		</div>
+		<jsp:include page="Footer.jsp" />
+	</div>
 </body>
 </html>

@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 
 import jiangsir.eshine.Utils.*;
-import tw.jiangsir.Utils.Config.ApplicationScope;
+import tw.jiangsir.Utils.Scopes.ApplicationScope;
 
 @WebListener
 public class InitializedListener implements ServletContextListener {

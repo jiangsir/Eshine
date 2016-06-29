@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import jiangsir.eshine.DAOs.UserService;
 import jiangsir.eshine.Objects.*;
 import jiangsir.eshine.Utils.*;
-import tw.jiangsir.Utils.Config.SessionScope;
+import tw.jiangsir.Utils.Scopes.SessionScope;
 
 @WebServlet(urlPatterns = {"/Login"})
 public class LoginServlet extends HttpServlet {

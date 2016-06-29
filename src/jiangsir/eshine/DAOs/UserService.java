@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import jiangsir.eshine.Objects.OnlineUser;
 import jiangsir.eshine.Objects.User;
-import tw.jiangsir.Utils.Config.SessionScope;
 import tw.jiangsir.Utils.Exceptions.DataException;
+import tw.jiangsir.Utils.Scopes.SessionScope;
 
 public class UserService {
 

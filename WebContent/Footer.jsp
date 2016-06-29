@@ -6,8 +6,11 @@
 <%@ page isELIgnored="false"%>
 
 <div id="footer">
-	<p>
+	<div id="footer_menu">eshine for Servlet3.0
+		${applicationScope.version} Built${applicationScope.built}</div>
+
+	<div>
 		Program by <a href="mailto:jiangsir@tea.nknush.kh.edu.tw"
 			class="no-under">jiangsir</a>
-	</p>
+	</div>
 </div>

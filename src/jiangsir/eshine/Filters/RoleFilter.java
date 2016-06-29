@@ -19,11 +19,13 @@ import javax.servlet.http.HttpSession;
 import jiangsir.eshine.DAOs.UserService;
 import jiangsir.eshine.Objects.OnlineUser;
 import jiangsir.eshine.Objects.User;
+import jiangsir.eshine.Utils.Filters.IAccessFilter;
 import tw.jiangsir.Utils.Annotations.RoleSetting;
-import tw.jiangsir.Utils.Config.ApplicationScope;
-import tw.jiangsir.Utils.Config.SessionScope;
+import tw.jiangsir.Utils.Exceptions.AccessException;
 import tw.jiangsir.Utils.Exceptions.Cause;
 import tw.jiangsir.Utils.Exceptions.RoleException;
+import tw.jiangsir.Utils.Scopes.ApplicationScope;
+import tw.jiangsir.Utils.Scopes.SessionScope;
 
 /**
  * Servlet Filter implementation class RoleFilter

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 import tw.jiangsir.Utils.Annotations.Persistent;
-import tw.jiangsir.Utils.Config.ApplicationScope;
 import tw.jiangsir.Utils.Exceptions.DataException;
+import tw.jiangsir.Utils.Scopes.ApplicationScope;
 
 public class OnlineUser extends User implements Serializable,
 	HttpSessionBindingListener {
