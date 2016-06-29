@@ -121,28 +121,11 @@ public class OnlineUser extends User implements Serializable, HttpSessionBinding
 	 * @throws AccessException
 	 */
 	public void doLogout() throws DataException {
-		// 只 登出 自己
-
-		// Integer Loginlogid = this.getLoginid();
-		// if (Loginlogid != null && !Loginlogid.equals(-1)) {
-		// LoginlogDAO loginlogDao = new LoginlogDAO();
-		// Loginlog loginlog = loginlogDao.getLoginlogById(Loginlogid);
-		// // new LoginlogDAO().updateLogouttime(Loginlogid, new Date());
-		// loginlog.setLogouttime(new Timestamp(new Date().getTime()));
-		// loginlogDao.update(loginlog);
-		// // this.setSessionid(null);
-		// // new UserDAO().update((User) this);
-		// }
-
-		// if (SessionFactory.getSessionById(sessionid) != null) {
-		// SessionFactory.getSessionById(sessionid).invalidate();
-		// }
 		if (session != null) {
 			session.invalidate();
 		}
-		this.setSessionid("");
-		this.setSession(null);
-		// this.setSessionid(null);
+		// this.setSessionid("");
+		// this.setSession(null);
 	}
 
 	// /**

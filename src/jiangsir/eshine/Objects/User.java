@@ -127,4 +127,8 @@ public class User {
 	// public String getPrivilege() {
 	// return ENV.context.getInitParameter(usergroup);
 	// }
+
+	public boolean getIsAdmin() {
+		return this.getRole() == ROLE.ADMIN;
+	}
 }
