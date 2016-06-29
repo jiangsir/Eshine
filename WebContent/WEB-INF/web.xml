@@ -6,26 +6,6 @@
 		<welcome-file>Index</welcome-file>
 	</welcome-file-list>
 	<context-param>
-		<param-name>GroupAdmin</param-name>
-		<param-value>*</param-value>
-	</context-param>
-	<context-param>
-		<param-name>GroupUser</param-name>
-		<param-value>Login, Logout, InsertArticle, UpdateArticle</param-value>
-	</context-param>
-	<context-param>
-		<param-name>GroupGuest</param-name>
-		<param-value>Login</param-value>
-	</context-param>
-	<context-param>
-		<param-name>ContestManager</param-name>
-		<param-value></param-value>
-	</context-param>
-	<context-param>
-		<param-name>LoginURI</param-name>
-		<param-value>Login</param-value>
-	</context-param>
-	<context-param>
 		<param-name>PAGESIZE</param-name>
 		<param-value>20</param-value>
 	</context-param>

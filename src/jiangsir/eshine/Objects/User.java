@@ -1,15 +1,7 @@
 package jiangsir.eshine.Objects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.http.HttpSession;
-
 import tw.jiangsir.Utils.Annotations.Persistent;
-
-import jiangsir.eshine.Utils.DataBase;
-import jiangsir.eshine.Utils.ENV;
-import jiangsir.eshine.Utils.Utils;
 
 /**
  *  - User.java
@@ -49,46 +41,7 @@ public class User {
 	private Integer visible = visible_TRUE;
 
 	public User() {
-
 	}
-
-	// public User(Integer userid) {
-	// String sql = "SELECT * FROM users WHERE id=" + userid;
-	// ArrayList<?> list = new DataBase().executeQuery(sql);
-	// if (list.size() == 0) {
-	// return;
-	// }
-	// this.init((HashMap<?, ?>) list.get(0));
-	// }
-	//
-	// public User(String account) {
-	// if (account == null || "".equals(account)) {
-	// return;
-	// }
-	// String sql = "SELECT * FROM users WHERE account='" +
-	// Utils.intoSQL(account) + "'";
-	// ArrayList<?> list = new DataBase().executeQuery(sql);
-	// if (list.size() == 0) {
-	// return;
-	// }
-	// this.init((HashMap<?, ?>) list.get(0));
-	// }
-
-	// public User(HashMap<?, ?> map) {
-	// if (map == null) {
-	// return;
-	// }
-	// this.init(map);
-	// }
-
-	// private void init(Map<?, ?> map) {
-	// this.setId((Integer) map.get("id"));
-	// this.setAccount((String) map.get("account"));
-	// this.setName((String) map.get("name"));
-	// this.setUsergroup((String) map.get("usergroup"));
-	// this.setPasswd((String) map.get("passwd"));
-	// this.setVisible((Integer) map.get("visible"));
-	// }
 
 	public Integer getId() {
 		return id;
@@ -152,14 +105,6 @@ public class User {
 	// public void setUsergroup(String usergroup) {
 	// this.usergroup = usergroup;
 	// }
-
-	/**
-	 * 登出相關動作, 包含 session 逾時也執行 doLogout <br>
-	 */
-	public void Logout(HttpSession session) {
-
-		session.invalidate();
-	}
 
 	// /**
 	// *

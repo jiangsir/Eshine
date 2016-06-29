@@ -4,9 +4,8 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-
-import jiangsir.eshine.DAOs.UserService;
-import jiangsir.eshine.Objects.User;
+import jiangsir.eshine.Objects.OnlineUser;
+import tw.jiangsir.Utils.Scopes.SessionScope;
 
 @WebServlet(urlPatterns = {"/Logout"})
 public class LogoutServlet extends HttpServlet {
@@ -19,14 +18,10 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		String session_account = (String) session.getAttribute("session_account");
-		User session_user = (User) session.getAttribute("UserObject");
-		if (session_user == null) {
-			// session_user = new User(session_account);
-			session_user = new UserService().getUserByAccount(session_account);
-		}
-
-		session_user.Logout(session);
+		// CurrentUser currentUser = SessionFactory.getCurrentUser(session);
+		System.out.println("Logout");
+		OnlineUser onlineUser = new SessionScope(session).getOnlineUser();
+		onlineUser.doLogout();
 		response.sendRedirect("./");
 	}
 }

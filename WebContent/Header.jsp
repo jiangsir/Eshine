@@ -11,7 +11,7 @@
 	</div>
 	<jsp:include page="include/SystemNow.jsp" />
 	<div id="navigation">
-		<c:if test="${sessionScope.session_account!=null}"> | <a
-				href="./Logout">離開管理</a> | </c:if>
+		<c:if test="${sessionScope.onlineUser!=null}"> | ${sessionScope.onlineUser.account } <a
+				href="./Logout">登出</a> | </c:if>
 	</div>
-	</div>
+</div>

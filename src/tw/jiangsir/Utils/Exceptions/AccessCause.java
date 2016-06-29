@@ -5,6 +5,8 @@
  */
 package tw.jiangsir.Utils.Exceptions;
 
+import jiangsir.eshine.Objects.OnlineUser;
+
 /**
  * @author nknush-001
  * 
@@ -14,25 +16,27 @@ public class AccessCause extends Throwable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final String TYPE_ALERT = "ALERT";
-	public static final String TYPE_INFORMATION = "INFORMATION";
-	public static final String TYPE_WARNING = "WARNING";
-	public static final String TYPE_ERROR = "ERROR";
-	public static final String TYPE_SEVERE = "SEVERE";
-	private String type = TYPE_WARNING;
-	private String session_account = "";
+
+	// public static final String TYPE_ALERT = "ALERT";
+	// public static final String TYPE_INFORMATION = "INFORMATION";
+	// public static final String TYPE_WARNING = "WARNING";
+	// public static final String TYPE_ERROR = "ERROR";
+	// public static final String TYPE_SEVERE = "SEVERE";
+
+	public static enum TYPE {
+		ALERT, INFORMATION, WARNING, ERROR, SEVERE
+	}
+
+	private TYPE type = TYPE.WARNING;
+	private OnlineUser onlineUser;
 	private String resource_message = "";
 	private String text_message = "";
 	private String debug_message = "";
 
-	public AccessCause(String type, String sessionAccount,
-			String resourceMessage, String textMessage, String debugMessage) {
-		super();
-		this.type = type;
-		session_account = sessionAccount;
-		resource_message = resourceMessage;
-		text_message = textMessage;
-		debug_message = debugMessage;
+	public AccessCause(TYPE type, OnlineUser onlineUser, String debug) {
+		this.setType(type);
+		this.setOnlineUser(onlineUser);
+		this.setDebug_message(debug);
 	}
 
 	@Override
@@ -40,12 +44,12 @@ public class AccessCause extends Throwable {
 		return super.getLocalizedMessage();
 	}
 
-	public String getSession_account() {
-		return session_account;
+	public OnlineUser getOnlineUser() {
+		return onlineUser;
 	}
 
-	public void setSession_account(String sessionAccount) {
-		session_account = sessionAccount;
+	public void setOnlineUser(OnlineUser onlineUser) {
+		this.onlineUser = onlineUser;
 	}
 
 	public String getResource_message() {
@@ -64,11 +68,11 @@ public class AccessCause extends Throwable {
 		text_message = textMessage;
 	}
 
-	public String getType() {
+	public TYPE getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(TYPE type) {
 		this.type = type;
 	}
 

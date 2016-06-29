@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 
 import jiangsir.eshine.Objects.*;
 import jiangsir.eshine.Utils.ENV;
+import tw.jiangsir.Utils.Scopes.SessionScope;
 
 @WebListener
 public class MyHttpSessionListener implements javax.servlet.http.HttpSessionListener, ServletRequestListener {
@@ -50,19 +51,15 @@ public class MyHttpSessionListener implements javax.servlet.http.HttpSessionList
 
 	public void sessionDestroyed(HttpSessionEvent event) {
 		String ipfrom = request.getRemoteAddr();
-		if (ENV.IP_CONNECTION.containsKey(ipfrom) && ENV.IP_CONNECTION.get(ipfrom) > 1) {
+		if (ENV.IP_CONNECTION != null && ENV.IP_CONNECTION.containsKey(ipfrom) && ENV.IP_CONNECTION.get(ipfrom) > 1) {
 			ENV.IP_CONNECTION.put(ipfrom, ENV.IP_CONNECTION.get(ipfrom) - 1);
 		} else {
 			ENV.IP_CONNECTION.remove(ipfrom);
 		}
 		HttpSession session = event.getSession();
 		String sessionid = session.getId();
-		User userObject = (User) session.getAttribute("UserObject");
-		if (userObject == null) {
-			String session_account = (String) session.getAttribute("session_account");
-			// userObject = new User(session_account);
-		}
-		userObject.Logout(session);
+		OnlineUser onlineUser = new SessionScope(session).getOnlineUser();
+		onlineUser.doLogout();
 		synchronized (ENV.OnlineSessions) {
 			ENV.OnlineSessions.remove(sessionid);
 		}

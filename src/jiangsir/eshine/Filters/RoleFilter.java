@@ -23,6 +23,7 @@ import jiangsir.eshine.Utils.Filters.IAccessFilter;
 import tw.jiangsir.Utils.Annotations.RoleSetting;
 import tw.jiangsir.Utils.Exceptions.AccessException;
 import tw.jiangsir.Utils.Exceptions.Cause;
+import tw.jiangsir.Utils.Exceptions.DataException;
 import tw.jiangsir.Utils.Exceptions.RoleException;
 import tw.jiangsir.Utils.Scopes.ApplicationScope;
 import tw.jiangsir.Utils.Scopes.SessionScope;
@@ -70,7 +71,7 @@ public class RoleFilter implements Filter {
 		}
 		OnlineUser onlineUser = new SessionScope(request).getOnlineUser();
 		if (!this.isUserInRoles(onlineUser, httpServlet.getClass().getAnnotation(RoleSetting.class))) {
-			throw new RoleException("您沒有權限瀏覽這個頁面。");
+			throw new DataException("您沒有權限瀏覽這個頁面。");
 		}
 
 		/**
