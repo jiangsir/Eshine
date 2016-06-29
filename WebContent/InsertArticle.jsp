@@ -10,29 +10,6 @@
 <jsp:include page="CommonHead.jsp" />
 
 <script type="text/javascript" src="./jscripts/jquery-1.2.6.min.js"></script>
-<script type="text/javascript" src="jscripts/js_date.js"></script>
-<script type="text/javascript"
-	src="jscripts/jquery.timeout.interval.idle.js"></script>
-<script language="javascript">
-jQuery(document).ready(function(){
-   mytime(parseInt(${now.time}) );
-});
-
-function mytime(nowtime){
-   var nowdate = new Date();
-   nowdate.setTime(nowtime);
-   jQuery("#now").text( formatDate( nowdate, "y-MM-dd HH:mm:ss") );
-   jQuery.interval(
-   function(){
-   var nowdate = new Date();
-   nowtime = nowtime + 1000;
- //  alert("nowtime="+nowtime);
-   nowdate.setTime(nowtime);
-   jQuery("#now").text( formatDate( nowdate, "y-MM-dd HH:mm:ss") );
-   },1000);
-}
-</script>
-
 </head>
 <jsp:useBean id="now" class="java.util.Date" />
 <jsp:useBean id="articleBean" class="jiangsir.eshine.Beans.ArticleBean" />

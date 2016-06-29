@@ -8,26 +8,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <jsp:include page="CommonHead.jsp" />
-<jsp:useBean id="now" class="java.util.Date" />
-<jsp:useBean id="articleBean" class="jiangsir.eshine.Beans.ArticleBean" />
-<jsp:setProperty name="articleBean" property="id" value="0" />
-<script type="text/javascript" src="./jscripts/jquery-1.2.6.min.js"></script>
-<script type="text/javascript" src="jscripts/js_date.js"></script>
-<script type="text/javascript"
-	src="jscripts/jquery.timeout.interval.idle.js"></script>
-<script language="javascript">
-jQuery(document).ready(function(){
-
-    $("select#niandu").children().each(function(){
-        if ( ${job.niandu} == $(this).val()) {
-            //alert("the same");
-            $(this).attr("selected", "true");
-            return;
-        }
-    });
-});
-
-</script>
 </head>
 <body>
 	<div id="wrapper">

@@ -9,52 +9,6 @@
 <head>
 <jsp:include page="CommonHead.jsp" />
 
-<script type="text/javascript" src="jscripts/js_date.js"></script>
-<script type="text/javascript"
-	src="jscripts/jquery.timeout.interval.idle.js"></script>
-<script language="javascript">
-jQuery(document).ready(function(){
-   var stoptime = parseInt(${job.finishtime.time});
-   var nowtime = parseInt(${now.time});
-   countdown( stoptime-nowtime );
-   mytime(parseInt(${now.time}) );
-});
-
-function mytime(nowtime){
-   var nowdate = new Date();
-   nowdate.setTime(nowtime);
-   jQuery("#now").text( formatDate( nowdate, "y-MM-dd HH:mm:ss") );
-   jQuery.interval(
-   function(){
-   var nowdate = new Date();
-   nowtime = nowtime + 1000;
- //  alert("nowtime="+nowtime);
-   nowdate.setTime(nowtime);
-   jQuery("#now").text( formatDate( nowdate, "y-MM-dd HH:mm:ss") );
-   },1000);
-}
-
-function countdown(countdown){
-   var secs = (countdown-(countdown%1000))/1000;
-   var mins = (secs-(secs%60))/60;
-   var hours = (mins-(mins%60))/60;
-   var days = (hours-(hours%24))/24;
-   var str = days+" 天 " + hours%24 + " 小時 " + mins%60 + " 分鐘 " + secs%60 + " 秒";
-   jQuery("#countdown").text( str );
-   jQuery.interval(
-   function(){
-   countdown = countdown - 1000;
-   var secs = (countdown-(countdown%1000))/1000;
-   var mins = (secs-(secs%60))/60;
-   var hours = (mins-(mins%60))/60;
-   var days = (hours-(hours%24))/24;
-   var str = days+" 天 " + hours%24 + " 小時 " + mins%60 + " 分鐘 " + secs%60 + " 秒";
-   jQuery("#countdown").text( str );
-   },1000);
-}
-
-</script>
-
 </head>
 <jsp:useBean id="now" class="java.util.Date" />
 <body>
