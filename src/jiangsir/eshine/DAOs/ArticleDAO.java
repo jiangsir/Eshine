@@ -11,11 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import jiangsir.eshine.Objects.Article;
-import jiangsir.eshine.Utils.DataBase;
 import tw.jiangsir.Utils.DAO.SuperDAO;
 
 /**
@@ -33,21 +29,22 @@ public class ArticleDAO extends SuperDAO<Article> {
 	 */
 	public ArrayList<Article> getArticles(int jobid, String type) {
 		String sqltype = (type == null || type.equals("")) ? "" : " AND type='" + type + "'";
-		ArrayList<Article> articles = new ArrayList<Article>();
 		String sql = "SELECT * FROM articles WHERE visible=" + Article.visible_OPEN + " " + sqltype + "AND jobid="
 				+ jobid + " ORDER BY id DESC";
-		Iterator<?> it = new DataBase().executeQuery(sql).iterator();
-		while (it.hasNext()) {
-			articles.add(new Article((HashMap<?, ?>) it.next()));
-		}
-		return articles;
+		return this.executeQuery(sql, Article.class);
+		// Iterator<?> it = new DataBexecuteQuery(sql).iterator();
+		// while (it.hasNext()) {
+		// articles.add(new Article((HashMap<?, ?>) it.next()));
+		// }
+		// return articles;
 	}
 
-	public Article getArticle(int articleid) {
-		for (Article article : this.executeQuery("SELECT * FROM articles WHERE id=" + articleid, Article.class)) {
+	public Article getArticleById(int articleid) {
+		String sql = "SELECT * FROM articles WHERE id=" + articleid;
+		for (Article article : this.executeQuery(sql, Article.class)) {
 			return article;
 		}
-		return null;
+		return new Article();
 	}
 
 	@Override
@@ -57,8 +54,7 @@ public class ArticleDAO extends SuperDAO<Article> {
 				+ "filesize, filetype, postdate, visible) VALUES" + "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		int articleid = 0;
 		try {
-			PreparedStatement pstmt = new DataBase().getConnection().prepareStatement(sql,
-					Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = this.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, article.getJobid());
 			pstmt.setString(2, article.getType());
 			pstmt.setString(3, article.getAuthor());
@@ -73,14 +69,9 @@ public class ArticleDAO extends SuperDAO<Article> {
 			pstmt.setString(11, article.getFiletype());
 			pstmt.setTimestamp(12, new Timestamp(article.getPostdate().getTime()));
 			pstmt.setInt(13, article.getVisible());
-			new DataBase().executeUpdate(pstmt, sql);
-			ResultSet rs = pstmt.getGeneratedKeys();
-			rs.next();
-			articleid = rs.getInt(1);
-			rs.close();
+			articleid = this.executeInsert(pstmt);
 			pstmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return articleid;

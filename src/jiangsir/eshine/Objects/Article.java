@@ -2,13 +2,10 @@ package jiangsir.eshine.Objects;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import jiangsir.eshine.DAOs.JobDAO;
 import jiangsir.eshine.DAOs.UpfileDAO;
-import jiangsir.eshine.Utils.DataBase;
 import jiangsir.eshine.Utils.ENV;
+import tw.jiangsir.Utils.Annotations.Persistent;
 
 /**
  *  - User.java
@@ -22,59 +19,39 @@ import jiangsir.eshine.Utils.ENV;
  */
 public class Article {
 
+	@Persistent(name = "id")
 	private Integer id = 0;
+	@Persistent(name = "jobid")
 	private Integer jobid = 0;
+	@Persistent(name = "author")
 	private String author = "";
+	@Persistent(name = "classname")
 	private String classname = "";
+	@Persistent(name = "grade")
 	private Integer grade = 0;
+	@Persistent(name = "title")
 	private String title = "";
+	@Persistent(name = "type")
 	private String type = "";
+	@Persistent(name = "email")
 	private String email = "";
+	@Persistent(name = "comment")
 	private String comment = "";
+	@Persistent(name = "filename")
 	private String filename = "";
+	@Persistent(name = "filesize")
 	private Long filesize = 0L;
+	@Persistent(name = "filetype")
 	private String filetype = "";
+	@Persistent(name = "postdate")
 	private Date postdate = new Date();
 	public static final int visible_OPEN = 1;
 	public static final int visible_HIDE = 0;
+	@Persistent(name = "visible")
 	private Integer visible = Article.visible_OPEN;
 
 	public Article() {
 
-	}
-
-	public Article(Integer id) {
-		String sql = "SELECT * FROM articles WHERE id=" + id;
-		ArrayList<?> list = new DataBase().executeQuery(sql);
-		if (list.size() == 0) {
-			return;
-		}
-		this.init((HashMap<?, ?>) list.get(0));
-	}
-
-	public Article(HashMap<?, ?> map) {
-		if (map == null) {
-			return;
-		}
-		this.init(map);
-	}
-
-	private void init(Map<?, ?> map) {
-		this.setId((Integer) map.get("id"));
-		this.setJobid((Integer) map.get("jobid"));
-		this.setType((String) map.get("type"));
-		this.setAuthor((String) map.get("author"));
-		this.setClassname((String) map.get("classname"));
-		// this.setClassnum((Integer) map.get("classnum"));
-		this.setGrade((Integer) map.get("grade"));
-		this.setTitle((String) map.get("title"));
-		this.setEmail((String) map.get("email"));
-		this.setComment((String) map.get("comment"));
-		this.setFilename((String) map.get("filename"));
-		this.setFilesize((Long) map.get("filesize"));
-		this.setFiletype((String) map.get("filetype"));
-		this.setPostdate((Date) map.get("postdate"));
-		this.setVisible((Integer) map.get("visible"));
 	}
 
 	public Integer getId() {
@@ -98,6 +75,8 @@ public class Article {
 	}
 
 	public void setAuthor(String author) {
+		if (author == null)
+			return;
 		this.author = author;
 	}
 
@@ -106,6 +85,8 @@ public class Article {
 	}
 
 	public void setClassname(String classname) {
+		if (classname == null)
+			return;
 		this.classname = classname;
 	}
 
@@ -122,6 +103,8 @@ public class Article {
 	}
 
 	public void setTitle(String title) {
+		if (title == null)
+			return;
 		this.title = title;
 	}
 
@@ -138,6 +121,8 @@ public class Article {
 	}
 
 	public void setComment(String comment) {
+		if (comment == null)
+			return;
 		this.comment = comment;
 	}
 
@@ -146,6 +131,8 @@ public class Article {
 	}
 
 	public void setFilename(String filename) {
+		if (filename == null)
+			return;
 		this.filename = filename;
 	}
 
@@ -216,5 +203,12 @@ public class Article {
 
 	public ArrayList<Upfile> getUpfiles() {
 		return new UpfileDAO().getUpfiles(id);
+	}
+
+	public String getAuthor_replaced() {
+		String author = this.getAuthor();
+		if (author.length() > 1)
+			return author.replace(author.charAt(1), 'O');
+		return author;
 	}
 }

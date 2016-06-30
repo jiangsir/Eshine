@@ -37,7 +37,7 @@ public class DownloadServlet extends HttpServlet {
 		if (articleid < 1410) {
 			this.doLocalDownload(articleid);
 		} else {
-			int upfileid = new ArticleDAO().getArticle(articleid).getUpfiles().get(0).getId();
+			int upfileid = new ArticleDAO().getArticleById(articleid).getUpfiles().get(0).getId();
 			this.doBlobDownload(upfileid);
 		}
 		return;
@@ -90,7 +90,7 @@ public class DownloadServlet extends HttpServlet {
 	 * @throws ServletException
 	 */
 	private void doLocalDownload(int articleid) {
-		Article article = new Article(articleid);
+		Article article = new ArticleDAO().getArticleById(articleid);
 		BufferedInputStream in = null;
 		ServletOutputStream out = null;
 		FileInputStream stream = null;

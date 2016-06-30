@@ -50,7 +50,7 @@
 						<tr>
 							<td>${fn:length(articles)-varstatus.count+1}</td>
 							<td>${article.title}<span style="font-size: x-small">(${article.postdate})</span></td>
-							<td>${article.author}</td>
+							<td>${article.author_replaced}</td>
 							<td>${article.type}</td>
 						</tr>
 					</c:forEach>

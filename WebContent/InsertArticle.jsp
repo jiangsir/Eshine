@@ -10,8 +10,6 @@
 <jsp:include page="CommonHead.jsp" />
 </head>
 <jsp:useBean id="now" class="java.util.Date" />
-<jsp:useBean id="articleBean" class="jiangsir.eshine.Beans.ArticleBean" />
-<jsp:setProperty name="articleBean" property="id" value="0" />
 <body>
 	<div id="wrapper">
 		<jsp:include page="Header.jsp" />
@@ -69,8 +67,7 @@
 						<textarea name="comment" cols="50" rows="10" id="comment"></textarea>
 					</p>
 					<p>
-						<br /> 檔案(上限: ${articleBean.maxFilesize})： <input type="file"
-							name="file" />
+						<br /> 檔案(上限: )： <input type="file" name="file" />
 					</p>
 					<p>&nbsp;</p>
 					<p>
