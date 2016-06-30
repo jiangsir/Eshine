@@ -8,8 +8,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <jsp:include page="CommonHead.jsp" />
-
-<script type="text/javascript" src="./jscripts/jquery-1.2.6.min.js"></script>
 </head>
 <jsp:useBean id="now" class="java.util.Date" />
 <jsp:useBean id="articleBean" class="jiangsir.eshine.Beans.ArticleBean" />

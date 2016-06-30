@@ -24,7 +24,6 @@ import tw.jiangsir.Utils.Annotations.RoleSetting;
 import tw.jiangsir.Utils.Exceptions.AccessException;
 import tw.jiangsir.Utils.Exceptions.Cause;
 import tw.jiangsir.Utils.Exceptions.DataException;
-import tw.jiangsir.Utils.Exceptions.RoleException;
 import tw.jiangsir.Utils.Scopes.ApplicationScope;
 import tw.jiangsir.Utils.Scopes.SessionScope;
 

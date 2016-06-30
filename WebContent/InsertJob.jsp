@@ -54,7 +54,7 @@
 				<h1>所有投稿作業：</h1>
 				<c:forEach var="job" items="${jobs}">
 					<h2>
-						<a href="./ShowJob?id=${job.id}">${job.niandu} 學年度 --
+						<a href="./ShowJob?id=${job.id}"><%-- ${job.niandu} 學年度 -- --%>
 							${job.title}</a>
 						<c:if test="${job.starttime.time > now.time}"> - 準備進行！</c:if>
 					</h2>

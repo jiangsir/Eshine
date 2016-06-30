@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		if (user != null) {
 			SessionScope sessionScope = new SessionScope(session);
 			sessionScope.setOnlineUser(new UserService().createOnlineUser(user.getId(), session));
-			response.sendRedirect(request.getContextPath() + sessionScope.getCurrentPage());
+			response.sendRedirect(request.getContextPath() + sessionScope.getPreviousPage());
 			return;
 		} else {
 			request.getRequestDispatcher("Login.jsp").forward(request, response);

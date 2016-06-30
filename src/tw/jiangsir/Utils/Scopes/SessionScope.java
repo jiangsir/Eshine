@@ -57,7 +57,7 @@ public class SessionScope implements Serializable {
 		this.setSession_requestheaders((HashMap<String, String>) session.getAttribute("session_requestheaders"));
 		this.setOnlineUser((OnlineUser) session.getAttribute("onlineUser"));
 		this.setLastsubmission((Date) session.getAttribute("lastsubmission"));
-		this.setHistories((ArrayList<String>) session.getAttribute("returnPages"));
+		this.setHistories((ArrayList<String>) session.getAttribute("histories"));
 	}
 
 	public String getSessionid() {
@@ -155,14 +155,14 @@ public class SessionScope implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public ArrayList<String> getHistories() {
-		if (session.getAttribute("histories") != null) {
+		if (session != null && session.getAttribute("histories") != null) {
 			this.histories = (ArrayList<String>) session.getAttribute("histories");
 		}
 		return this.histories;
 	}
 
 	public void setHistories(ArrayList<String> histories) {
-		if (histories == null) {
+		if (session == null || histories == null) {
 			return;
 		}
 		this.histories = histories;

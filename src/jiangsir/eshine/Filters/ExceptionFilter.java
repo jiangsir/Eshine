@@ -21,7 +21,7 @@ public class ExceptionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) res;
 		Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
 		if (throwable == null) {
-			System.out.println("throwable == null null");
+			// System.out.println("throwable == null null");
 			chain.doFilter(request, response);
 			return;
 		}
