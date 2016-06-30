@@ -51,7 +51,8 @@ public class MyHttpSessionListener implements javax.servlet.http.HttpSessionList
 
 	public void sessionDestroyed(HttpSessionEvent event) {
 		String ipfrom = request.getRemoteAddr();
-		if (ENV.IP_CONNECTION != null && ENV.IP_CONNECTION.containsKey(ipfrom) && ENV.IP_CONNECTION.get(ipfrom) > 1) {
+		if (ENV.IP_CONNECTION != null && ipfrom != null && ENV.IP_CONNECTION.containsKey(ipfrom)
+				&& ENV.IP_CONNECTION.get(ipfrom) > 1) {
 			ENV.IP_CONNECTION.put(ipfrom, ENV.IP_CONNECTION.get(ipfrom) - 1);
 		} else {
 			ENV.IP_CONNECTION.remove(ipfrom);

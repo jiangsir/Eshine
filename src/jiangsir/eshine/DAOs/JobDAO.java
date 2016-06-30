@@ -89,13 +89,12 @@ public class JobDAO extends SuperDAO<Job> {
 		String sql = "INSERT INTO `jobs` (niandu, title, comment, starttime, finishtime) VALUES (?,?,?,?,?);";
 		int jobid = 0;
 		try {
-			PreparedStatement pstmt = new DataBase().getConnection().prepareStatement(sql,
-					Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = this.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, job.getNiandu());
 			pstmt.setString(2, job.getTitle());
 			pstmt.setString(3, job.getComment());
-			pstmt.setTimestamp(4, new Timestamp(job.getStarttime().getTime()));
-			pstmt.setTimestamp(5, new Timestamp(job.getFinishtime().getTime()));
+			pstmt.setTimestamp(4, job.getStarttime());
+			pstmt.setTimestamp(5, job.getFinishtime());
 			this.executeUpdate(pstmt);
 			ResultSet rs = pstmt.getGeneratedKeys();
 			rs.next();
@@ -115,13 +114,12 @@ public class JobDAO extends SuperDAO<Job> {
 				+ job.getId() + ";";
 		int result = -1;
 		try {
-			PreparedStatement pstmt = new DataBase().getConnection().prepareStatement(sql,
-					Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = this.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, job.getNiandu());
 			pstmt.setString(2, job.getTitle());
 			pstmt.setString(3, job.getComment());
-			pstmt.setTimestamp(4, new Timestamp(job.getStarttime().getTime()));
-			pstmt.setTimestamp(5, new Timestamp(job.getFinishtime().getTime()));
+			pstmt.setTimestamp(4, job.getStarttime());
+			pstmt.setTimestamp(5, job.getFinishtime());
 			result = this.executeUpdate(pstmt);
 			pstmt.close();
 		} catch (SQLException e) {

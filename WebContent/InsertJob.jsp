@@ -18,7 +18,7 @@
 				<h2>&nbsp;</h2>
 				<p></p>
 				<form action="" method="post" name="form1" id="form1">
-<%-- 					<p>
+					<%-- 					<p>
 						年度: <select name="niandu" id="niandu">
 							<option value="${niandu }">${niandu}</option>
 							<option value="99">99</option>
@@ -29,18 +29,22 @@
 							<option value="104">104</option>
 						</select>
 					</p>
- --%>					<p>
+ --%>
+					<p>
 						標題： <input name="title" type="text" value="${job.title}" size="50" />
 					</p>
 					<p>&nbsp;</p>
-					<p>開放投稿日期：(格式: %Y-%m-%d %H:%M:%S)</p>
-					<input name="starttime" type="text" value="${job.starttime}"
-						size="30" />
-					<p>
-						結束日期：<br /> <input name="finishtime" type="text"
-							value="${job.finishtime}" size="30" />
-					</p>
-					<p>&nbsp;</p>
+					<div>
+						<p>開放投稿日期：(格式: %Y-%m-%d %H:%M:%S)</p>
+						<input name="starttime" type="text" value="${job.starttime}"
+							size="30" />
+					</div>
+					<div style="margin-top: 1em;">
+						<p>結束日期：</p>
+						<input name="finishtime" type="text" value="${job.finishtime}"
+							size="30" />
+					</div>
+					<br></br>
 					<p>
 						<input name="id" type="hidden" id="id" value="${job.id}" /> <input
 							type="submit" name="Submit" value="送出" />

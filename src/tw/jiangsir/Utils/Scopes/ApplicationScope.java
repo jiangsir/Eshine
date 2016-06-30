@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 
+import jiangsir.eshine.DAOs.AppConfigService;
 import jiangsir.eshine.Objects.AppConfig;
 import jiangsir.eshine.Objects.OnlineUser;
 import jiangsir.eshine.Objects.User;
@@ -37,11 +38,11 @@ public class ApplicationScope {
 		ApplicationScope.setAppRoot();
 		ApplicationScope.setVersion();
 		ApplicationScope.setBuilt();
-		ApplicationScope.setAppRoot();
 		ApplicationScope.setOnlineSessions(onlineSessions);
 		ApplicationScope.setOnlineUsers(onlineUsers);
 		ApplicationScope.setUrlpatterns(urlpatterns);
 		ApplicationScope.setRoleMap(roleMap);
+		ApplicationScope.setAppConfig(new AppConfigService().getAppConfig());
 	}
 
 	public static HashMap<String, HttpSession> getOnlineSessions() {

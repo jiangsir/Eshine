@@ -1,5 +1,6 @@
 package jiangsir.eshine.Objects;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import jiangsir.eshine.Utils.Utils;
 import tw.jiangsir.Utils.Annotations.Persistent;
@@ -25,9 +26,9 @@ public class Job {
 	@Persistent(name = "comment")
 	private String comment = "";
 	@Persistent(name = "starttime")
-	private Date starttime = new Date();
+	private Timestamp starttime = new Timestamp(System.currentTimeMillis());
 	@Persistent(name = "finishtime")
-	private Date finishtime = new Date();
+	private Timestamp finishtime = new Timestamp(System.currentTimeMillis());
 
 	public Job() {
 
@@ -77,10 +78,11 @@ public class Job {
 	}
 
 	public void setNiandu(String niandu) {
-		if (niandu == null) {
-			return;
+		try {
+			this.setNiandu(Integer.parseInt(niandu));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
 		}
-
 	}
 
 	public String getTitle() {
@@ -101,34 +103,34 @@ public class Job {
 		this.comment = comment == null ? "" : comment;
 	}
 
-	public Date getStarttime() {
+	public Timestamp getStarttime() {
 		return starttime;
 	}
 
-	public void setStarttime(Date starttime) {
+	public void setStarttime(Timestamp starttime) {
 		this.starttime = starttime;
+	}
+
+	public void setFinishtime(Timestamp finishtime) {
+		this.finishtime = finishtime;
 	}
 
 	public void setStarttime(String starttime) {
 		if (starttime == null) {
 			return;
 		}
-		this.setStarttime(Utils.parseDatetime(starttime));
+		this.setStarttime(Timestamp.valueOf(starttime));
 	}
 
-	public Date getFinishtime() {
+	public Timestamp getFinishtime() {
 		return finishtime;
-	}
-
-	public void setFinishtime(Date finishtime) {
-		this.finishtime = finishtime;
 	}
 
 	public void setFinishtime(String finishtime) {
 		if (finishtime == null) {
 			return;
 		}
-		this.setFinishtime(Utils.parseDatetime(finishtime));
+		this.setFinishtime(Timestamp.valueOf(finishtime));
 	}
 
 	/**

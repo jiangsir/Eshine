@@ -35,10 +35,10 @@ public class EditJobServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int jobid = Integer.parseInt(request.getParameter("id"));
 		Job job = new JobDAO().getJobById(jobid);
-		job.setNiandu(Integer.parseInt(request.getParameter("niandu")));
+		job.setNiandu(request.getParameter("niandu"));
 		job.setTitle(request.getParameter("title"));
-		job.setStarttime(Utils.parseDatetime(request.getParameter("starttime")));
-		job.setFinishtime(Utils.parseDatetime(request.getParameter("finishtime")));
+		job.setStarttime(request.getParameter("starttime"));
+		job.setFinishtime(request.getParameter("finishtime"));
 		job.setComment(request.getParameter("comment"));
 		try {
 			new JobDAO().update(job);

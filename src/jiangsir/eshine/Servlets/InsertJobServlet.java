@@ -33,7 +33,7 @@ public class InsertJobServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Job job = new Job();
-		job.setNiandu(Integer.parseInt(request.getParameter("niandu")));
+		job.setNiandu(request.getParameter("niandu"));
 		job.setTitle(request.getParameter("title"));
 		job.setStarttime(request.getParameter("starttime"));
 		job.setFinishtime(request.getParameter("finishtime"));
