@@ -6,7 +6,7 @@
 <%@ page isELIgnored="false"%>
 
 <div id="footer">
-	<p id="footer_menu">eshine for Servlet3.0
+	<p id="footer_menu">eshine for Servlet3.1
 		${applicationScope.version} Built${applicationScope.built}</p>
 
 	<p>
