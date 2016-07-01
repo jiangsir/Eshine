@@ -42,8 +42,9 @@ public class ExceptionFilter implements Filter {
 
 		String s = tracestring.toString();
 		if (!s.contains("SQL ERROR: INSERT INTO exceptions")) {
-			new ExceptionDAO().insert_PSTMT(uri, onlineUser.getAccount(), request.getRemoteAddr(), throwable.toString(),
-					s);
+			// new ExceptionDAO().insert_PSTMT(uri, onlineUser.getAccount(),
+			// request.getRemoteAddr(), throwable.toString(),
+			// s);
 		}
 		chain.doFilter(request, response);
 	}

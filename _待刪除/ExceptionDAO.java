@@ -7,13 +7,11 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-
-import jiangsir.eshine.Utils.DataBase;
 import jiangsir.eshine.Utils.ENV;
 import jiangsir.eshine.Utils.Utils;
+import tw.jiangsir.Utils.DAO.SuperDAO;
 
-
-public class ExceptionDAO {
+public class ExceptionDAO extends SuperDAO<Exception> {
 
 	public ExceptionDAO() {
 
@@ -21,29 +19,26 @@ public class ExceptionDAO {
 
 	public int getCount() {
 		String SQL = "SELECT * FROM exceptions";
-		return new DataBase().executeCount(SQL);
+		return this.executeCount(SQL);
 	}
 
 	public ArrayList getErrors(int count) {
-		String SQL = "SELECT * FROM exceptions ORDER BY id DESC LIMIT 0,"
-				+ count;
-		return new DataBase().executeQuery(SQL);
+		String SQL = "SELECT * FROM exceptions ORDER BY id DESC LIMIT 0," + count;
+		return this.executeQuery(SQL);
 	}
 
-	public ArrayList getErrorsByIP(String ip) {
-		String SQL = "SELECT * FROM exceptions WHERE ipaddr='" + ip
-				+ "' ORDER BY id DESC";
-		return new DataBase().executeQuery(SQL);
+	public ArrayList<Exception> getErrorsByIP(String ip) {
+		String SQL = "SELECT * FROM exceptions WHERE ipaddr='" + ip + "' ORDER BY id DESC";
+		return this.executeQuery(SQL);
 	}
 
-	public int insert_PSTMT(String uri, String account, String ipaddr,
-			String exceptiontype, String exception) {
+	public int insert_PSTMT(String uri, String account, String ipaddr, String exceptiontype, String exception) {
 		String sql = "INSERT INTO exceptions (uri, account, ipaddr, "
 				+ "exceptiontype, exception, exceptiontime) VALUES(?,?,?,?,?,?)";
 		int id = 0;
 		try {
-			PreparedStatement pstmt = new DataBase().getConnection()
-					.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = new DataBase().getConnection().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, uri);
 			pstmt.setString(2, account);
 			pstmt.setString(3, ipaddr);
@@ -63,8 +58,7 @@ public class ExceptionDAO {
 		return id;
 	}
 
-	public int insert_OLD(String uri, String account, String ipaddr,
-			String exceptiontype, String exception) {
+	public int insert_OLD(String uri, String account, String ipaddr, String exceptiontype, String exception) {
 		if (exception.contains("INSERT INTO exceptions")) {
 			return 0;
 		}
@@ -83,9 +77,26 @@ public class ExceptionDAO {
 		exceptiontype = Utils.intoSQL(exceptiontype);
 		exception = Utils.intoSQL(exception);
 		String SQL = "INSERT INTO exceptions (uri, account, ipaddr, "
-				+ "exceptiontype, exception, exceptiontime) VALUES('" + uri
-				+ "', '" + account + "', '" + ipaddr + "', '" + exceptiontype
-				+ "', '" + exception + "', '" + ENV.getNow() + "')";
+				+ "exceptiontype, exception, exceptiontime) VALUES('" + uri + "', '" + account + "', '" + ipaddr
+				+ "', '" + exceptiontype + "', '" + exception + "', '" + ENV.getNow() + "')";
 		return new DataBase().executeInsert(SQL);
+	}
+
+	@Override
+	protected int insert(Exception t) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected int update(Exception t) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected boolean delete(long i) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

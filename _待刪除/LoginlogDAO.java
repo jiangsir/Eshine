@@ -5,12 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-
-import jiangsir.eshine.Objects.Loginlog;
-import jiangsir.eshine.Utils.DataBase;
 import jiangsir.eshine.Utils.ENV;
 import jiangsir.eshine.Utils.Utils;
-
 
 public class LoginlogDAO {
 
@@ -24,13 +20,12 @@ public class LoginlogDAO {
 		try {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			new ExceptionDAO().insert_PSTMT("DataBase.java", "unknown",
-					"unknown IP", e.getLocalizedMessage(), Utils
-							.printStackTrace(e, SQL));
+			new ExceptionDAO().insert_PSTMT("DataBase.java", "unknown", "unknown IP", e.getLocalizedMessage(),
+					Utils.printStackTrace(e, SQL));
 			e.printStackTrace();
 		}
-		System.out.println(ENV.logHeader() + "PSTMT_SQL=" + SQL + " 共耗時 "
-				+ (System.currentTimeMillis() - starttime) + " ms");
+		System.out.println(
+				ENV.logHeader() + "PSTMT_SQL=" + SQL + " 共耗時 " + (System.currentTimeMillis() - starttime) + " ms");
 		return result;
 	}
 
@@ -39,16 +34,14 @@ public class LoginlogDAO {
 				+ "message, logintime, logouttime)VALUES(?,?,?,?,?,?);";
 		int id = 0;
 		try {
-			PreparedStatement pstmt = new DataBase().getConnection()
-					.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = new DataBase().getConnection().prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, loginlog.getUserid());
 			pstmt.setString(2, loginlog.getUseraccount());
 			pstmt.setString(3, loginlog.getIpaddr());
 			pstmt.setString(4, loginlog.getMessage());
-			pstmt.setTimestamp(5, new Timestamp(loginlog.getLogintime()
-					.getTime()));
-			pstmt.setTimestamp(6, new Timestamp(loginlog.getLogouttime()
-					.getTime()));
+			pstmt.setTimestamp(5, new Timestamp(loginlog.getLogintime().getTime()));
+			pstmt.setTimestamp(6, new Timestamp(loginlog.getLogouttime().getTime()));
 			this.executeUpdate(pstmt, sql);
 			ResultSet rs = pstmt.getGeneratedKeys();
 			rs.next();

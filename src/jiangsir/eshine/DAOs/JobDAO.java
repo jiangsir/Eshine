@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import jiangsir.eshine.Objects.Job;
-import jiangsir.eshine.Utils.DataBase;
 import jiangsir.eshine.Utils.Utils;
 import tw.jiangsir.Utils.DAO.SuperDAO;
 
@@ -133,8 +132,7 @@ public class JobDAO extends SuperDAO<Job> {
 		String sql = "DELETE FROM `jobs` WHERE id=" + jobid + ";";
 		boolean result = false;
 		try {
-			PreparedStatement pstmt = new DataBase().getConnection().prepareStatement(sql,
-					Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = this.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			result = this.executeDelete(pstmt);
 			pstmt.close();
 		} catch (SQLException e) {

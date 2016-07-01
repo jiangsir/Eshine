@@ -1,6 +1,5 @@
 package jiangsir.eshine.Utils;
 
-
 import java.security.Security;
 import javax.mail.*;
 import javax.mail.internet.AddressException;
@@ -34,19 +33,19 @@ public class Mailer implements Runnable {
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[Mailer ERROR]: " + e.toString());
-			new ExceptionDAO()
-					.insert_PSTMT("Mailer.java", "unknown", "unknown IP",
-							"AddressException: " + e.getLocalizedMessage(),
-							Utils.printStackTrace(e));
+			// new ExceptionDAO()
+			// .insert_PSTMT("Mailer.java", "unknown", "unknown IP",
+			// "AddressException: " + e.getLocalizedMessage(),
+			// Utils.printStackTrace(e));
 			e.printStackTrace();
 
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[Mailer ERROR]: " + e.toString());
-			new ExceptionDAO()
-					.insert_PSTMT("Mailer.java", "unknown", "unknown IP",
-							"MessagingException: " + e.getLocalizedMessage(),
-							Utils.printStackTrace(e));
+			// new ExceptionDAO()
+			// .insert_PSTMT("Mailer.java", "unknown", "unknown IP",
+			// "MessagingException: " + e.getLocalizedMessage(),
+			// Utils.printStackTrace(e));
 			e.printStackTrace();
 		}
 	}
@@ -54,16 +53,14 @@ public class Mailer implements Runnable {
 	public void SMTPSender() {
 		boolean sessionDebug = false;
 		Properties properties = System.getProperties();
-		properties
-				.put("mail.host", ENV.context.getInitParameter("SYSTEM_MAIL"));
+		properties.put("mail.host", ENV.context.getInitParameter("SYSTEM_MAIL"));
 		properties.put("mail.transport.protocol", "smtp");
 		Session mailsession = Session.getDefaultInstance(properties, null);
 		mailsession.setDebug(sessionDebug);
 		Message message = new MimeMessage(mailsession);
 		InternetAddress[] address = null;
 		try {
-			message.setFrom(new InternetAddress(ENV.context
-					.getInitParameter("SYSTEM_MAIL")));
+			message.setFrom(new InternetAddress(ENV.context.getInitParameter("SYSTEM_MAIL")));
 			address = InternetAddress.parse(this.mailto, false);
 			message.setRecipients(Message.RecipientType.TO, address);
 			message.setSubject("[ZeroJudge系統通知信] " + this.subject);
@@ -95,21 +92,18 @@ public class Mailer implements Runnable {
 		props.put("mail.smtp.auth", "true");
 
 		final String serveremail = ENV.context.getInitParameter("SYSTEM_MAIL");
-		final String password = ENV.context
-				.getInitParameter("SYSTEM_MAIL_PASSWORD");
-		Session session = Session.getDefaultInstance(props,
-				new Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(serveremail, password);
-					}
-				});
+		final String password = ENV.context.getInitParameter("SYSTEM_MAIL_PASSWORD");
+		Session session = Session.getDefaultInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(serveremail, password);
+			}
+		});
 
 		// -- Create a new message --
 		Message message = new MimeMessage(session);
 		InternetAddress[] address = null;
 		// -- Set the FROM and TO fields --
-		message.setFrom(new InternetAddress(ENV.context
-				.getInitParameter("SYSTEM_MAIL")));
+		message.setFrom(new InternetAddress(ENV.context.getInitParameter("SYSTEM_MAIL")));
 		address = InternetAddress.parse(this.mailto, false);
 		message.setRecipients(Message.RecipientType.TO, address);
 		message.setSubject("[ZeroJudge系統通知信] " + this.subject);
@@ -140,8 +134,7 @@ public class Mailer implements Runnable {
 		Session session = Session.getDefaultInstance(props, null);
 
 		// 請將紅色部分對應替換成你的郵箱帳號和密碼
-		URLName urln = new URLName("pop3", "pop.gmail.com", 995, null, email,
-				passwd);
+		URLName urln = new URLName("pop3", "pop.gmail.com", 995, null, email, passwd);
 		try {
 			Store store = session.getStore(urln);
 			store.connect();

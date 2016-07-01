@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import jiangsir.eshine.DAOs.ArticleDAO;
@@ -11,13 +12,11 @@ import jiangsir.eshine.DAOs.JobDAO;
 import jiangsir.eshine.Objects.Article;
 import jiangsir.eshine.Objects.Job;
 import jiangsir.eshine.Objects.Message;
-import jiangsir.eshine.Utils.MyException;
-import jiangsir.eshine.Utils.Uploader;
 import tw.jiangsir.Utils.Exceptions.DataException;
 import jiangsir.eshine.DAOs.UpfileDAO;
 import jiangsir.eshine.Objects.Upfile;
-import org.apache.commons.fileupload.FileItem;
 
+@MultipartConfig(maxFileSize = 20 * 1024 * 1024, maxRequestSize = 50 * 1024 * 1024)
 @WebServlet(urlPatterns = {"/InsertArticle"})
 public class InsertArticleServlet extends HttpServlet {
 	/**
@@ -68,6 +67,12 @@ public class InsertArticleServlet extends HttpServlet {
 		request.getRequestDispatcher("InsertArticle.jsp").forward(request, response);
 	}
 
+	public String getFilename(Part part) {
+		String header = part.getHeader("Content-Disposition");
+		String filename = header.substring(header.indexOf("filename=\"") + 10, header.lastIndexOf("\""));
+		return filename;
+	}
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -78,76 +83,67 @@ public class InsertArticleServlet extends HttpServlet {
 			return;
 		}
 
-		Uploader uploader;
 		int articleid;
 		try {
-			uploader = new Uploader(request, response);
 
 			Article newarticle = new Article();
-			newarticle.setAuthor(uploader.getFormField("author"));
-			newarticle.setClassname(uploader.getFormField("classname"));
-			// newarticle.setClassnum(Integer.parseInt(uploader
-			// .getFormField("classnum")));
-			newarticle.setGrade(Integer.parseInt(uploader.getFormField("grade")));
-			newarticle.setType(uploader.getFormField("type"));
-			newarticle.setTitle(uploader.getFormField("title"));
-			newarticle.setEmail(uploader.getFormField("email"));
-			newarticle.setComment(uploader.getFormField("comment"));
-			// Iterator<?> it = uploader.getFileItems("file").iterator();
-			// FileItem item = (FileItem) it.next();
-			// if (item.getName() == null || item.getName().equals("")) {
-			// throw new MyException("您沒有上傳檔案，請將您的投稿文章製作成檔案的形式並且上傳！");
-			// }
-
-			// newarticle.setFilename(item.getName());
-			// newarticle.setFiletype(item.getContentType());
-			// newarticle.setFilesize(item.getSize());
-			newarticle.setJobid(Integer.parseInt(uploader.getFormField("jobid")));
+			newarticle.setAuthor(request.getParameter("author"));
+			newarticle.setClassname(request.getParameter("classname"));
+			newarticle.setGrade(request.getParameter("grade"));
+			newarticle.setType(request.getParameter("type"));
+			newarticle.setTitle(request.getParameter("title"));
+			newarticle.setEmail(request.getParameter("email"));
+			newarticle.setComment(request.getParameter("comment"));
+			newarticle.setJobid(request.getParameter("jobid"));
 			articleid = new ArticleDAO().insert(newarticle);
 			newarticle.setId(articleid);
 			// 將檔案上傳
 			// uploader.uploadFile(item, newarticle.getINNER_PATH(), newarticle
 			// .getINNER_FILENAME());
 
-			for (FileItem item : uploader.getFileItems("file")) {
-				if (item.getName() == null || item.getName().equals("")) {
-					continue;
+			for (Part part : request.getParts()) {
+				if ("file".equals(part.getName())) {
+					Upfile newupfile = new Upfile();
+					newupfile.setArticleid(articleid);
+					newupfile.setFilename(this.getFilename(part));
+					newupfile.setFiletype(part.getContentType());
+					newupfile.setFilesize(part.getSize());
+					newupfile.setBinary(part.getInputStream());
+					int upfileid = new UpfileDAO().insert(newupfile);
+					newupfile.setId(upfileid);
 				}
-				// IE 會傳上完整的路徑，不好
-				String filename = item.getName();
-				filename = filename.substring(filename.lastIndexOf("\\") + 1);
-
-				// 再 加入資料庫記錄
-				Upfile newupfile = new Upfile();
-				newupfile.setArticleid(articleid);
-				newupfile.setFilename(filename);
-				newupfile.setFiletype(item.getContentType());
-				newupfile.setFilesize((long) item.getSize());
-				newupfile.setBinary(item.getInputStream());
-
-				// newupfile.setBinary(item.getInputStream());
-				int upfileid = new UpfileDAO().insert(newupfile);
-				newupfile.setId(upfileid);
-				// 檔案是否就不用上傳了。
-				// FileUploader.write2file(item, new
-				// File(newupfile.getINNER_PATH(),
-				// newupfile.getINNER_FILENAME()));
 			}
+			// for (FileItem item : uploader.getFileItems("file")) {
+			// if (item.getName() == null || item.getName().equals("")) {
+			// continue;
+			// }
+			// // IE 會傳上完整的路徑，不好
+			// String filename = item.getName();
+			// filename = filename.substring(filename.lastIndexOf("\\") + 1);
+			//
+			// // 再 加入資料庫記錄
+			// Upfile newupfile = new Upfile();
+			// newupfile.setArticleid(articleid);
+			// newupfile.setFilename(filename);
+			// newupfile.setFiletype(item.getContentType());
+			// newupfile.setFilesize((long) item.getSize());
+			// newupfile.setBinary(item.getInputStream());
+			// int upfileid = new UpfileDAO().insert(newupfile);
+			// newupfile.setId(upfileid);
+			// }
 
-		} catch (MyException e) {
-			e.printStackTrace();
-			throw new DataException(e);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DataException(e);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			if (e.getLocalizedMessage().contains("FileSizeLimitExceededException")) {
+				throw new DataException(
+						"上傳檔案超過上限(" + this.getClass().getAnnotation(MultipartConfig.class).maxFileSize() / 1024 / 1024
+								+ "MB)！請縮小。");
+			}
+			throw new DataException(e);
 		}
-		// Message message = new Message();
-		// message.setType(Message.MessageType_INFOR);
-		// message.setLinks("ShowArticles", "看其他已投稿件");
-		// message.setPlainTitle("恭喜您已成功投稿完成(#" + articleid + ")");
-		// request.setAttribute("message", message);
-		// request.getRequestDispatcher("./Message.jsp")
-		// .forward(request, response);
 		response.sendRedirect("./" + ShowArticlesServlet.class.getAnnotation(WebServlet.class).urlPatterns()[0]);
 	}
 }

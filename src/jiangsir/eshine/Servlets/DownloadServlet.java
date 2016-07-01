@@ -9,9 +9,7 @@ import java.io.InputStream;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-
 import jiangsir.eshine.DAOs.ArticleDAO;
-import jiangsir.eshine.DAOs.ExceptionDAO;
 import jiangsir.eshine.DAOs.UpfileDAO;
 import jiangsir.eshine.Objects.*;
 import tw.jiangsir.Utils.Scopes.SessionScope;
@@ -97,11 +95,12 @@ public class DownloadServlet extends HttpServlet {
 		File file = new File(article.getINNER_PATH(), article.getINNER_FILENAME());
 		if (!file.exists()) {
 			OnlineUser onlineUser = new SessionScope(request).getOnlineUser();
-			ExceptionDAO exceptionDao = new ExceptionDAO();
+			// ExceptionDAO exceptionDao = new ExceptionDAO();
 			String exception = "articleid=" + articleid + "\n";
 			exception += "filepath=" + file.getPath() + "\n";
-			exceptionDao.insert_PSTMT(request.getRequestURI(), onlineUser.getAccount(), request.getRemoteAddr(),
-					"檔案不存在！", exception);
+			// exceptionDao.insert_PSTMT(request.getRequestURI(),
+			// onlineUser.getAccount(), request.getRemoteAddr(),
+			// "檔案不存在！", exception);
 			Message message = new Message();
 			message.setType(Message.MessageType_ERROR);
 			message.setPlainTitle("檔案不存在！");

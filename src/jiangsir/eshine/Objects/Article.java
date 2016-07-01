@@ -1,6 +1,8 @@
 package jiangsir.eshine.Objects;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import jiangsir.eshine.DAOs.JobDAO;
 import jiangsir.eshine.DAOs.UpfileDAO;
@@ -44,7 +46,7 @@ public class Article {
 	@Persistent(name = "filetype")
 	private String filetype = "";
 	@Persistent(name = "postdate")
-	private Date postdate = new Date();
+	private Timestamp postdate = new Timestamp(System.currentTimeMillis());
 	public static final int visible_OPEN = 1;
 	public static final int visible_HIDE = 0;
 	@Persistent(name = "visible")
@@ -68,6 +70,13 @@ public class Article {
 
 	public void setJobid(Integer jobid) {
 		this.jobid = jobid;
+	}
+
+	public void setJobid(String jobid) {
+		if (jobid == null || !jobid.matches("[0-9]+")) {
+			return;
+		}
+		this.setJobid(Integer.parseInt(jobid));
 	}
 
 	public String getAuthor() {
@@ -113,6 +122,8 @@ public class Article {
 	}
 
 	public void setType(String type) {
+		if (type == null)
+			return;
 		this.type = type;
 	}
 
@@ -155,12 +166,19 @@ public class Article {
 		this.filetype = filetype;
 	}
 
-	public Date getPostdate() {
+	public Timestamp getPostdate() {
 		return postdate;
 	}
 
-	public void setPostdate(Date postdate) {
+	public void setPostdate(Timestamp postdate) {
 		this.postdate = postdate;
+	}
+	public void setPostdate(String postdate) {
+		try {
+			this.setPostdate(Timestamp.valueOf(postdate));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Integer getVisible() {
@@ -176,6 +194,8 @@ public class Article {
 	}
 
 	public void setEmail(String email) {
+		if (email == null)
+			return;
 		this.email = email;
 	}
 
@@ -185,6 +205,16 @@ public class Article {
 
 	public void setGrade(Integer grade) {
 		this.grade = grade;
+	}
+
+	public void setGrade(String grade) {
+		if (grade == null)
+			return;
+		try {
+			this.setGrade(Integer.parseInt(grade));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// =====================================================================
@@ -211,4 +241,30 @@ public class Article {
 			return author.replace(author.charAt(1), 'O');
 		return author;
 	}
+	public String getNianji() {
+
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date(getPostdate().getTime()));
+		int offset = year - cal.get(Calendar.YEAR);
+		int grade = this.getGrade().intValue();
+		String result = "";
+		if (grade >= 7 && grade <= 9) {
+			grade = grade - 6;
+			if (grade + offset > 3) {
+				result += "國中校友" + ((3 - grade) + year - 11) + " 級";
+			} else {
+				result += "國 " + (grade % 3 == 0 ? 3 : grade % 3);
+			}
+		} else if (grade >= 10 && grade <= 12) {
+			grade = grade - 9;
+			if (grade + offset > 3) {
+				result += "高中校友" + ((3 - grade) + year - 11) + " 級";
+			} else {
+				result += "高 " + (grade % 3 == 0 ? 3 : grade % 3);
+			}
+		}
+		return result;
+	}
+
 }
