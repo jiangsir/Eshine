@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account` varchar(20) NOT NULL DEFAULT '',
   `passwd` varchar(20) NOT NULL,
-  `role` varchar(50) NOT NULL DEFAULT 'GroupUser',
+  `role` varchar(50) NOT NULL DEFAULT 'USER',
   `visible` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

@@ -1,6 +1,5 @@
 package jiangsir.eshine.Objects;
 
-import javax.servlet.http.HttpSession;
 import tw.jiangsir.Utils.Annotations.Persistent;
 
 /**
