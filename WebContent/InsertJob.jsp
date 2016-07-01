@@ -8,6 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <jsp:include page="CommonHead.jsp" />
+<script src="InsertJob.js?${applicationScope.built }"></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -36,12 +37,14 @@
 					<p>&nbsp;</p>
 					<div>
 						<p>開放投稿日期：(格式: %Y-%m-%d %H:%M:%S)</p>
-						<input name="starttime" type="text" value="${job.starttime}"
+						<input name="starttime" type="text"
+							value="<fmt:formatDate value="${job.starttime}" pattern="yyyy-MM-dd HH:mm:ss" />"
 							size="30" />
 					</div>
 					<div style="margin-top: 1em;">
 						<p>結束日期：</p>
-						<input name="finishtime" type="text" value="${job.finishtime}"
+						<input name="finishtime" type="text"
+							value="<fmt:formatDate value="${job.finishtime}" pattern="yyyy-MM-dd HH:mm:ss" />"
 							size="30" />
 					</div>
 					<br></br>
@@ -54,8 +57,9 @@
 				<h1>所有投稿作業：</h1>
 				<c:forEach var="job" items="${jobs}">
 					<h2>
-						<a href="./ShowJob?id=${job.id}"><%-- ${job.niandu} 學年度 -- --%>
-							${job.title}</a>
+						<a href="./ShowJob?id=${job.id}"> <%-- ${job.niandu} 學年度 -- --%>
+							${job.title}
+						</a>
 						<c:if test="${job.starttime.time > now.time}"> - 準備進行！</c:if>
 					</h2>
 				</c:forEach>

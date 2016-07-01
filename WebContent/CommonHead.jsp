@@ -12,7 +12,11 @@
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript" src="jscripts/js_date.js"></script>
 <script type="text/javascript"
-    src="jscripts/jquery.timeout.interval.idle.js"></script>
+	src="jscripts/jquery.timeout.interval.idle.js"></script>
+<link href="styles/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+<script src="jscripts/jquery-ui-timepicker-addon.js"></script>
+
+
 
 <script type="text/javascript">
 	jQuery(document).ready(function() {
