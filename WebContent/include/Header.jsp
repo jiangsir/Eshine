@@ -9,7 +9,7 @@
 	<div id="logo">
 		<a href="./"><img src="./images/eshineTITLE.png" /></a>
 	</div>
-	<jsp:include page="include/SystemNow.jsp" />
+	<jsp:include page="SystemNow.jsp" />
 	<div id="navigation">
 		<c:if test="${sessionScope.onlineUser!=null}"> | ${sessionScope.onlineUser.account } <a
 				href="./Logout">登出</a> | </c:if>

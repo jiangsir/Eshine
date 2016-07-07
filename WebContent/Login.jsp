@@ -4,16 +4,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page isELIgnored="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<jsp:include page="CommonHead.jsp" />
+<jsp:include page="include/CommonHead.jsp" />
 </head>
 <body>
 	<div id="wrapper">
-		<jsp:include page="Header.jsp" />
+		<jsp:include page="include/Header.jsp" />
 		<div id="inner-wrap">
-			<jsp:include page="SideBar.jsp" />
+			<jsp:include page="include/SideBar.jsp" />
 			<div id="main">
 				<div id="loginbox">
 					<p style="font-size: large; font-weight: bold; color: red;">${sessionScope.LoginMessage}</p>
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 		</div>
-		<jsp:include page="Footer.jsp" />
+		<jsp:include page="include/Footer.jsp" />
 	</div>
 </body>
 </html>

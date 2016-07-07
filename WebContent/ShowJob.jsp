@@ -4,11 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page isELIgnored="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<jsp:include page="CommonHead.jsp" />
-<script language="javascript">
+<jsp:include page="include/CommonHead.jsp" />
+<script type="text/javascript">
 	jQuery(document).ready(function() {
 		$("#type").change(function() { //事件發生
 			//alert("======");
@@ -19,9 +19,9 @@
 </head>
 <body>
 	<div id="wrapper">
-		<jsp:include page="Header.jsp" />
+		<jsp:include page="include/Header.jsp" />
 		<div id="inner-wrap">
-			<jsp:include page="SideBar.jsp" />
+			<jsp:include page="include/SideBar.jsp" />
 			<div id="main">
 				<h1>
 					<%-- ${job.niandu} 學年度 --  --%>${job.title}</h1>
@@ -78,7 +78,7 @@
 				<br /> <br /> <br /> <br /> <br /> <br />
 			</div>
 		</div>
-		<jsp:include page="Footer.jsp" />
+		<jsp:include page="include/Footer.jsp" />
 	</div>
 </body>
 </html>

@@ -42,7 +42,6 @@
 		});
 	});
 </script>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="UTF-8">
 <title>${applicationScope.appConfig.title}</title>
 

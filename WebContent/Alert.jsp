@@ -6,15 +6,15 @@
 
 <%@ page isELIgnored="false"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="CommonHead.jsp" />
+<jsp:include page="include/CommonHead.jsp" />
 </head>
 <body>
 	<div id="container">
 		<!-- header -->
-		<jsp:include page="Header.jsp" />
+		<jsp:include page="include/Header.jsp" />
 		<!--end header -->
 		<!-- main -->
 		<div id="main">
@@ -71,7 +71,7 @@
 		</div>
 		<!-- end main -->
 		<!-- footer -->
-		<jsp:include page="Footer.jsp" />
+		<jsp:include page="include/Footer.jsp" />
 		<!-- end footer -->
 	</div>
 </body>

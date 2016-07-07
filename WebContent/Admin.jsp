@@ -4,11 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page isELIgnored="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<jsp:include page="CommonHead.jsp" />
-<script language="javascript">
+<jsp:include page="include/CommonHead.jsp" />
+<script type="text/javascript">
 	jQuery(document).ready(function() {
 		$("#type").change(function() { //事件發生
 			//alert("======");
@@ -28,9 +28,9 @@
 </head>
 <body>
 	<div id="wrapper">
-		<jsp:include page="Header.jsp" />
+		<jsp:include page="include/Header.jsp" />
 		<div id="inner-wrap">
-			<jsp:include page="SideBar.jsp" />
+			<jsp:include page="include/SideBar.jsp" />
 			<div id="main">
 				<h1>
 					<a href="./InsertJob">建立新的投稿作業</a>
@@ -38,8 +38,7 @@
 				<c:if test="${job.id>0}">
 					<h1>現正進行的投稿作業：</h1>
 					<h2>
-						<a href="./ShowJob?id=${job.id}">
-							<%-- ${job.niandu} 學年度 --  --%>${job.title}</a>
+						<a href="./ShowJob?id=${job.id}"> <%-- ${job.niandu} 學年度 --  --%>${job.title}</a>
 					</h2>
 					<br />
 					<br />
@@ -47,8 +46,7 @@
 				<h1>所有投稿作業：</h1>
 				<c:forEach var="job" items="${jobs}">
 					<h2>
-						<a href="./ShowJob?id=${job.id}">
-							<%-- ${job.niandu} 學年度 --  --%>${job.title}</a>
+						<a href="./ShowJob?id=${job.id}"> <%-- ${job.niandu} 學年度 --  --%>${job.title}</a>
 						<c:if test="${job.starttime.time > now.time}"> - 準備進行！</c:if>
 						(<span><a href="./EditJob?id=${job.id}">修改</a></span> | <span
 							id="deleteJob" jobid="${job.id}">刪除</span>)
@@ -57,7 +55,7 @@
 				<br /> <br /> <br /> <br />
 			</div>
 		</div>
-		<jsp:include page="Footer.jsp" />
+		<jsp:include page="include/Footer.jsp" />
 	</div>
 </body>
 </html>
