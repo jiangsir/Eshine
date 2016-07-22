@@ -46,7 +46,8 @@ function UploadImage() {
 		success : function(result) {
 			// alert(result);
 			var json = JSON.parse(result);
-			jQuery("#Testjudge_dialog3 #Testjudge_htmlstatus").text(json.htmlstatus);
+			jQuery("#Testjudge_dialog3 #Testjudge_htmlstatus").text(
+					json.htmlstatus);
 			jQuery("#Testjudge_dialog3 #Testjudge_result").text(json.result);
 			var $dialog3 = $("#Testjudge_dialog3").dialog({
 				autoOpen : true,
