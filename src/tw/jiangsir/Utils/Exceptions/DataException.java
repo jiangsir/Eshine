@@ -22,6 +22,9 @@ public class DataException extends RuntimeException {
 	public DataException(String message, Cause cause) {
 		super(message, cause);
 	}
+	public DataException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
 	public DataException(Throwable cause) {
 		super(cause);

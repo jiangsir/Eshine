@@ -89,7 +89,7 @@ public class ArticleDAO extends SuperDAO<Article> {
 	 * @return
 	 */
 	@Override
-	protected boolean delete(long articleid) throws SQLException {
+	public boolean delete(long articleid) throws SQLException {
 		String sql = "UPDATE articles SET visible=" + Article.visible_HIDE + " WHERE id=" + articleid;
 		return this.execute(sql);
 	}

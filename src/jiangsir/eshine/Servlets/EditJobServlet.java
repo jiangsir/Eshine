@@ -9,7 +9,6 @@ import javax.servlet.http.*;
 
 import jiangsir.eshine.DAOs.JobDAO;
 import jiangsir.eshine.Objects.Job;
-import jiangsir.eshine.Utils.Utils;
 import tw.jiangsir.Utils.Annotations.RoleSetting;
 import tw.jiangsir.Utils.Exceptions.DataException;
 

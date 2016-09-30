@@ -46,8 +46,9 @@
 				<table style="width: 90%;">
 					<tr>
 						<th width="10%">編號</th>
-						<th width="75%">題目</th>
+						<th width="60%">題目</th>
 						<th width="15%">分類</th>
+						<th width="15%">操作</th>
 					</tr>
 					<c:forEach var="article" items="${articles}" varStatus="varstatus">
 						<tr>
@@ -55,6 +56,7 @@
 							<td width="10%" style="vertical-align: top"><strong>${article.id}:
 									${article.title}</strong></td>
 							<td width="12%"><span style="font-size: x-small">${article.type}</span></td>
+							<td width="12%"><a href="DeleteArticle.api?id=${article.id}">刪除</a></td>
 						</tr>
 						<tr>
 							<td width="5%" style="vertical-align: top">&nbsp;</td>

@@ -8,8 +8,10 @@ import javax.servlet.http.*;
 import jiangsir.eshine.DAOs.ArticleDAO;
 import jiangsir.eshine.DAOs.JobDAO;
 import jiangsir.eshine.Objects.Job;
+import tw.jiangsir.Utils.Annotations.RoleSetting;
 
 @WebServlet(urlPatterns = {"/ShowJob"})
+@RoleSetting
 public class ShowJobServlet extends HttpServlet {
 	/**
 	 * 
