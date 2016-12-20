@@ -21,8 +21,11 @@
 					請注意!! <br /> 每個人每一個組別投稿上限為 3 篇!!
 				</h2>
 				<h3>
-					現在時間: <span id="now"></span>
+					投稿作業說明：<br /> ${job.comment}<br />
 				</h3>
+				<p></p>
+				<p></p>
+				<p></p>
 				<p></p>
 				<form action="" method="post" enctype="multipart/form-data"
 					name="form1" id="form1">
@@ -67,7 +70,8 @@
 						<textarea name="comment" cols="50" rows="10" id="comment"></textarea>
 					</p>
 					<p>
-						<br /> 檔案(上限: ${maxFileSize/1024/1024}MB )： <input type="file" name="file" />
+						<br /> 檔案(上限: ${maxFileSize/1024/1024}MB )： <input type="file"
+							name="file" />
 					</p>
 					<p>&nbsp;</p>
 					<p>

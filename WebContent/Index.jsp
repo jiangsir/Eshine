@@ -23,9 +23,7 @@
 					<c:otherwise>
 						<h1>${job.title}</h1>
 						<p>${job.comment}</p>
-						<h3>
-							現在時間: <span id="now"></span>
-						</h3>
+						<br />
 						<br />
 						<c:choose>
 							<c:when test="${now.time > job.finishtime.time}">

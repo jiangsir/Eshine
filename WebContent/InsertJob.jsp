@@ -34,7 +34,10 @@
 					<p>
 						標題： <input name="title" type="text" value="${job.title}" size="50" />
 					</p>
-					<p>&nbsp;</p>
+                    <p>
+                        投稿作業說明：<br />
+                        <textarea name="comment" cols="80%" rows="5" id="comment">${job.comment}</textarea>
+                    </p>
 					<div>
 						<p>開放投稿日期：(格式: %Y-%m-%d %H:%M:%S)</p>
 						<input name="starttime" type="text"
