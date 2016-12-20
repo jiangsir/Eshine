@@ -12,64 +12,68 @@
 <jsp:include page="include/CommonHead.jsp" />
 </head>
 <body>
-	<div id="container">
+	<div id="wrapper">
 		<!-- header -->
 		<jsp:include page="include/Header.jsp" />
 		<!--end header -->
-		<!-- main -->
-		<div id="main">
-			<div id="text">
-				<fieldset
-					style="text-align: left; padding: 1em; margin: auto; width: 60%;">
-					<legend style="font-size: x-large;">${alert.type}</legend>
-					<h1>${alert.title}</h1>
-					<p></p>
-					<h2>${alert.subtitle }</h2>
-					<div>${alert.content}</div>
-					<hr style="margin-top: 3em;" />
-					<ul>
-						<c:forEach var="list" items="${alert.list}">
-							<li>${list}</li>
-						</c:forEach>
-					</ul>
-					<ul>
-						<c:forEach var="map" items="${alert.map}">
-							<li>${map.key}:${map.value}</li>
-						</c:forEach>
-					</ul>
-					<hr style="margin-top: 3em;" />
-					<div style="text-align: center;">
-						<c:forEach var="uri" items="${alert.uris}">
-							<a href="${uri.value}" type="button">${uri.key}</a>
-						</c:forEach>
-					</div>
-				</fieldset>
-			</div>
-			<p></p>
-			<c:if test="${sessionScope.onlineUser.isAdmin}">
-				<fieldset style="text-align: left; background-color: maroon;">
-					<legend>Debug: </legend>
-					<ul>
-						<c:forEach var="debug" items="${alert.debugs}">
-							<li>${debug}</li>
-						</c:forEach>
-					</ul>
-					<div>
-						<c:if test="${fn:length(alert.stacktrace)>0}">
-							<div style="text-align: left; margin-top: 1em;">
-								<h3>stacktrace:</h3>
-								<div style="font-family: monospace;">
-									<c:forEach var="stacktrace" items="${alert.stacktrace}">${stacktrace.className}.${stacktrace.methodName}(${stacktrace.fileName}:${stacktrace.lineNumber})<br />
-									</c:forEach>
+		<div id="inner-wrap">
+			<jsp:include page="include/SideBar.jsp" />
+
+			<!-- main -->
+			<div id="main">
+				<div id="text">
+					<fieldset
+						style="text-align: left; padding: 1em; margin: auto; width: 60%;">
+						<legend style="font-size: x-large;">${alert.type}</legend>
+						<h1>${alert.title}</h1>
+						<p></p>
+						<h2>${alert.subtitle }</h2>
+						<div>${alert.content}</div>
+						<hr style="margin-top: 3em;" />
+						<ul>
+							<c:forEach var="list" items="${alert.list}">
+								<li>${list}</li>
+							</c:forEach>
+						</ul>
+						<ul>
+							<c:forEach var="map" items="${alert.map}">
+								<li>${map.key}:${map.value}</li>
+							</c:forEach>
+						</ul>
+						<hr style="margin-top: 3em;" />
+						<div style="text-align: center;">
+							<c:forEach var="uri" items="${alert.uris}">
+								<a href="${uri.value}" type="button">${uri.key}</a>
+							</c:forEach>
+						</div>
+					</fieldset>
+				</div>
+				<p></p>
+				<c:if test="${sessionScope.onlineUser.isAdmin}">
+					<fieldset style="text-align: left; background-color: maroon;">
+						<legend>Debug: </legend>
+						<ul>
+							<c:forEach var="debug" items="${alert.debugs}">
+								<li>${debug}</li>
+							</c:forEach>
+						</ul>
+						<div>
+							<c:if test="${fn:length(alert.stacktrace)>0}">
+								<div style="text-align: left; margin-top: 1em;">
+									<h3>stacktrace:</h3>
+									<div style="font-family: monospace;">
+										<c:forEach var="stacktrace" items="${alert.stacktrace}">${stacktrace.className}.${stacktrace.methodName}(${stacktrace.fileName}:${stacktrace.lineNumber})<br />
+										</c:forEach>
+									</div>
 								</div>
-							</div>
-						</c:if>
-					</div>
-				</fieldset>
-			</c:if>
-			<p></p>
+							</c:if>
+						</div>
+					</fieldset>
+				</c:if>
+				<p></p>
+			</div>
+			<!-- end main -->
 		</div>
-		<!-- end main -->
 		<!-- footer -->
 		<jsp:include page="include/Footer.jsp" />
 		<!-- end footer -->

@@ -67,7 +67,7 @@
 						<textarea name="comment" cols="50" rows="10" id="comment"></textarea>
 					</p>
 					<p>
-						<br /> 檔案(上限: )： <input type="file" name="file" />
+						<br /> 檔案(上限: ${maxFileSize/1024/1024}MB )： <input type="file" name="file" />
 					</p>
 					<p>&nbsp;</p>
 					<p>

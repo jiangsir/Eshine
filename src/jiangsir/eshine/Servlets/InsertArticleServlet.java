@@ -61,7 +61,7 @@ public class InsertArticleServlet extends HttpServlet {
 		if (!this.isAvailable(job)) {
 			return;
 		}
-
+		request.setAttribute("maxFileSize", this.getClass().getAnnotation(MultipartConfig.class).maxFileSize());
 		request.setAttribute("article", new Article());
 		request.setAttribute("job", job);
 		request.getRequestDispatcher("InsertArticle.jsp").forward(request, response);
@@ -95,6 +95,11 @@ public class InsertArticleServlet extends HttpServlet {
 			newarticle.setEmail(request.getParameter("email"));
 			newarticle.setComment(request.getParameter("comment"));
 			newarticle.setJobid(request.getParameter("jobid"));
+
+			Part filepart = request.getPart("file");
+			if ("".equals(this.getFilename(filepart))) {
+				throw new DataException("請選擇要上傳的檔案！");
+			}
 			articleid = new ArticleDAO().insert(newarticle);
 			newarticle.setId(articleid);
 			// 將檔案上傳

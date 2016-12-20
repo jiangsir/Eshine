@@ -8,6 +8,7 @@ import jiangsir.eshine.DAOs.JobDAO;
 import jiangsir.eshine.DAOs.UpfileDAO;
 import jiangsir.eshine.Utils.ENV;
 import tw.jiangsir.Utils.Annotations.Persistent;
+import tw.jiangsir.Utils.Exceptions.DataException;
 
 /**
  *  - User.java
@@ -84,8 +85,8 @@ public class Article {
 	}
 
 	public void setAuthor(String author) {
-		if (author == null)
-			return;
+		if (author == null || "".equals(author))
+			throw new DataException("「姓名」欄位不可為空！");
 		this.author = author;
 	}
 
@@ -112,8 +113,8 @@ public class Article {
 	}
 
 	public void setTitle(String title) {
-		if (title == null)
-			return;
+		if (title == null || "".equals(title))
+			throw new DataException("「投稿題目」欄位不可為空！");
 		this.title = title;
 	}
 
@@ -132,8 +133,8 @@ public class Article {
 	}
 
 	public void setComment(String comment) {
-		if (comment == null)
-			return;
+		if (comment == null || "".equals(comment))
+			throw new DataException("「作品簡介」欄位不可為空！");
 		this.comment = comment;
 	}
 
@@ -194,8 +195,8 @@ public class Article {
 	}
 
 	public void setEmail(String email) {
-		if (email == null)
-			return;
+		if (email == null || "".equals(email))
+			throw new DataException("email 欄位不可為空！");
 		this.email = email;
 	}
 
